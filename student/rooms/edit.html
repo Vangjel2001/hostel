@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" 
+        href="file:///C:/xampp/htdocs/hostel/style.css">
+        <title>Reservation Update</title>
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <h1>Reservation Update</h1>
+        <h3>Please fill in all the fields in the form below to complete 
+            your room reservation update:</h3>
+        <form method="post" action="">
+
+            <!-- Room and Booking Information -->
+
+            <p>How long are you staying at our hostel?</p>
+            <label for="startDate">Reservation Starting Date: </label>
+            <input type="date" name="startDate" id="startDate" required>
+            <br>
+
+            <label for="endDate">Reservation Ending Date: </label>
+            <input type="date" name="endDate" id="endDate" required>
+            <br>
+
+            <label for="roomNumber">Room Number</label>
+            <select name="roomNumber" id="roomNumber" required><br>
+
+            </select>
+
+            <p>Do you want to have breakfast, lunch or dinner included?</p>
+            <label for="foodStatus">Choose one of the options below: </label>
+            <select name="foodStatus" id="foodStatus" required>
+                <option value="Just Breakfast">Just Breakfast</option>
+                <option value="Just Lunch">Just Lunch</option>
+                <option value="Just Dinner">Just Dinner</option>
+                <option value="Breakfast and Lunch">Breakfast 
+                    and Lunch</option>
+                <option value="Breakfast and Dinner">Breakfast and Dinner</option>
+                <option value="Lunch and Dinner">Lunch and Dinner</option>
+                <option value="Breakfast, Lunch and Dinner">Breakfast, Lunch 
+                    and Dinner</option>
+                <option value="No food">I do not want any meals</option>
+            </select><br>
+
+            <input type="submit" name="submit" value="Update Reservation">
+        </form>
+
+        <a href="view.html">Cancel</a>
+    </body>
+</html>
