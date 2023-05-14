@@ -23,7 +23,7 @@
             <input type="submit" name="submit" value="Log In">
         </form>
 
-        <a href="../home.html">Go Back</a>
+        <a href="../home.php">Go Back</a>
     <body>
         
     </body>

@@ -34,6 +34,6 @@
             </ul>  
         </nav>
 
-        <a href="../home.html">Go Back</a>
+        <a href="../home.php">Go Back</a>
     </body>
 </html>

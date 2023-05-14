@@ -15,7 +15,7 @@
         <p>Administrator Name: </p>
         <p>Administrator Password: </p>
 
-        <a href="edit.html">Edit log in information</a>
-        <a href="../home.html">Go Back</a>
+        <a href="edit.php">Edit log in information</a>
+        <a href="../home.php">Go Back</a>
     </body>
 </html>

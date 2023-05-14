@@ -109,6 +109,6 @@
             <input type="submit" name="submit" value="Edit Student">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>

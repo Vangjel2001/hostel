@@ -28,6 +28,6 @@
             <input type="submit" name="submit" value="Cancel Booking">
         </form>
 
-        <a href="view.html">Go Back</a>
+        <a href="view.php">Go Back</a>
     </body>
 </html>

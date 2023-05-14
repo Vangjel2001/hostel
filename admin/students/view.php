@@ -32,7 +32,7 @@
             </tr>
         </table>
 
-        <a href="add.html">Add a student and guardian</a>
-        <a href="../home.html">Go Back</a>
+        <a href="add.php">Add a student and guardian</a>
+        <a href="../home.php">Go Back</a>
     </body>
 </html>

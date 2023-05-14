@@ -21,8 +21,8 @@
             </tr>
         </table>
 
-        <a href="add.html">Add A Room</a>
-        <a href="../home.html">Go Back</a>
+        <a href="add.php">Add A Room</a>
+        <a href="../home.php">Go Back</a>
 
     </body>
 </html>

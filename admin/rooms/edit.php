@@ -3,14 +3,14 @@
     <head>
         <link rel="stylesheet" 
         href="file:///C:/xampp/htdocs/hostel/style.css">
-        <title>Add A Room</title>
+        <title>Edit Room</title>
         <style>
 
         </style>
     </head>
 
     <body>
-        <h1>Add A Room</h1>
+        <h1>Edit Room</h1>
         <form method="post" action="">
             <label for="roomNumber">Room Number: </label>
             <input type="number" name="roomNumber" id="roomNumber" 
@@ -33,9 +33,9 @@
             <input type="number" name="numberOfStudents" 
             id="numberOfStudents" required><br>
 
-            <input type="submit" name="submit" value="Add Room">
+            <input type="submit" name="submit" value="Update Room">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>

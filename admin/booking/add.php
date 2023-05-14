@@ -3,33 +3,30 @@
     <head>
         <link rel="stylesheet" 
         href="file:///C:/xampp/htdocs/hostel/style.css">
-        <title>Reservation Update</title>
+        <title>Make A Reservation</title>
         <style>
 
         </style>
     </head>
 
     <body>
-        <h1>Reservation Update</h1>
-        <h3>Please fill in all the fields in the form below to complete 
-            your room reservation update:</h3>
+        <h1>Make A Reservation</h1>
         <form method="post" action="">
+            <label for="studentEmail">Student Email: </label>
+            <input type="email" name="studentEmail" id="studentEmail" 
+            required><br>
 
-            <!-- Room and Booking Information -->
+            <label for="roomNumber">Room Number: </label>
+            <select name="roomNumber" id="roomNumber" required>
 
-            <p>How long are you staying at our hostel?</p>
-            <label for="startDate">Reservation Starting Date: </label>
-            <input type="date" name="startDate" id="startDate" required>
-            <br>
+            </select><br>
 
-            <label for="endDate">Reservation Ending Date: </label>
-            <input type="date" name="endDate" id="endDate" required>
-            <br>
+            <label for="startDate">Reservation Start Date: </label>
+            <input type="date" name="startDate" id="startDate" 
+            required><br>
 
-            <label for="roomNumber">Room Number</label>
-            <select name="roomNumber" id="roomNumber" required><br>
-
-            </select>
+            <label for="endDate">Reservation End Date: </label>
+            <input type="date" name="endDate" id="endDate" required><br>
 
             <p>Do you want to have breakfast, lunch or dinner included?</p>
             <label for="foodStatus">Choose one of the options below: </label>
@@ -46,9 +43,11 @@
                 <option value="No food">I do not want any meals</option>
             </select><br>
 
-            <input type="submit" name="submit" value="Update Reservation">
+            <input type="submit" name="submit" value="Book Room">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
+
+
 </html>

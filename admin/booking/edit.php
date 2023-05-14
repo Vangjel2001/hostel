@@ -3,14 +3,14 @@
     <head>
         <link rel="stylesheet" 
         href="file:///C:/xampp/htdocs/hostel/style.css">
-        <title>Make A Reservation</title>
+        <title>Edit Reservation</title>
         <style>
 
         </style>
     </head>
 
     <body>
-        <h1>Make A Reservation</h1>
+        <h1>Edit Reservation</h1>
         <form method="post" action="">
             <label for="studentEmail">Student Email: </label>
             <input type="email" name="studentEmail" id="studentEmail" 
@@ -26,7 +26,8 @@
             required><br>
 
             <label for="endDate">Reservation End Date: </label>
-            <input type="date" name="endDate" id="endDate" required><br>
+            <input type="date" name="endDate" id="endDate" required>
+            <br>
 
             <p>Do you want to have breakfast, lunch or dinner included?</p>
             <label for="foodStatus">Choose one of the options below: </label>
@@ -43,10 +44,10 @@
                 <option value="No food">I do not want any meals</option>
             </select><br>
 
-            <input type="submit" name="submit" value="Book Room">
+            <input type="submit" name="submit" value="Update Reservation">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 
 

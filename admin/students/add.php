@@ -3,30 +3,30 @@
     <head>
         <link rel="stylesheet" 
         href="file:///C:/xampp/htdocs/hostel/style.css">
-        <title>Student Sign Up</title>
+        <title>Adding Student</title>
         <style>
 
         </style>
     </head>
 
     <body>
-        <h1>Student Sign Up</h1>
-        <h3>Please fill in all the fields in the form below to complete 
-            your registration:</h3>
+        <h1>Adding Student</h1>
+        <h3>Please fill in all the fields in the form below to add a 
+            student:</h3>
         <form method="post" action="">
 
             <!--Student Information-->
             <label for="studentName">Name: </label>
             <input type="text" name="studentName" id="studentName" required>
             <br>
-            
+
             <label for="studentSurname">Surname: </label>
             <input type="text" name="studentSurname" id="studentSurname" 
             required><br>
 
             <label for="studentEmail">Email: </label>
-            <input type="email" name="studentEmail" id="studentEmail" required>
-            <br>
+            <input type="email" name="studentEmail" id="studentEmail" 
+            required><br>
 
             <label for="studentPhoneNumber">Phone Number: </label>
             <input type="text" name="studentPhoneNumber" 
@@ -106,10 +106,9 @@
                 </option>    
             </select><br>
 
-            <p>Click the button below to continue and book a room:</p>
-            <input type="submit" name="submit" value="Finish Registration">
+            <input type="submit" name="submit" value="Add Student">
         </form>
 
-        <a href="../home.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>

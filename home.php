@@ -13,14 +13,14 @@
         <nav>  
             <ul>
 
-            <li><a href="home.html"> Home </a></li>
-            <li><a href="about.html"> About Us</a></li>    
-            <li><a href="student/signup.html"> Sign Up 
+            <li><a href="home.php"> Home </a></li>
+            <li><a href="about.php"> About Us</a></li>    
+            <li><a href="student/signup.php"> Sign Up 
                 And Make A Reservation </a></li>  
-            <li><a href="student/login.html"> Log In </a></li>
-            <li><a href="admin/login.html"> Administrator Log In</a></li>   
-            <li><a href="contact.html"> Contact </a></li>  
-            <li><a href="useTerms.html"> Terms of use </a></li>  
+            <li><a href="student/login.php"> Log In </a></li>
+            <li><a href="admin/login.php"> Administrator Log In</a></li>   
+            <li><a href="contact.php"> Contact </a></li>  
+            <li><a href="useTerms.php"> Terms of use </a></li>  
              
             </ul>  
         </nav>

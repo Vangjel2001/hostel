@@ -1,19 +1,78 @@
+<?php 
+
+    /*require the script from the database connection file
+    and the file containing user-defined functions*/
+    require_once "C:/xampp\htdocs\hostel\pdo.php";
+    require_once "C:/xampp\htdocs\hostel/functions.php";
+
+    //start the session
+    session_start();
+
+    /*display flash messages if things have gone right or wrong
+    during the use of the application*/
+    displayErrorMessage();
+    displaySuccessMessage();
+
+    //check if the student has logged in or signed up
+    if(!isset($_SESSION['studentEmail']))
+    {
+        $_SESSION['error']="Please log in or sign up first in order 
+        to continue.";
+        header("Location: C:/xampp\htdocs\hostel\home.php");
+        return;
+    }
+
+    if(isset($_POST['submit']))
+    {
+        //check if the guardian is underage
+        if($_POST['guardianAge']<18)
+        {
+            $_SESSION['error']="Your guardian should be 18 years old 
+            or older. Try entering another guardian.";
+            header("Location: edit.php");
+            return;
+        }
+        //check if the guardian has the same phone number as the student
+        if($_POST['guardianPhoneNumber']==$_POST['studentPhoneNumber'])
+        {
+            $_SESSION['error']="Your guardian should have a different 
+            phone number from yours.";
+            header("Location: edit.php");
+            return;
+        }
+
+        //update guardian in the guardian table
+        updateGuardianRow($pdo, $_SESSION['guardianID']);
+        
+
+        //update student in the student table
+        updateStudentRow($pdo, $_SESSION['studentID'], 
+        $_SESSION['guardianID']);
+
+
+        /*Write a success message and send the signed up student 
+        to the student home page*/
+        $_SESSION['success']="Your profile was updated successfully!";
+        header("Location: view.php");
+        return;
+    }
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
         <link rel="stylesheet" 
         href="file:///C:/xampp/htdocs/hostel/style.css">
-        <title>Adding Student</title>
+        <title>Student Profile Edit</title>
         <style>
 
         </style>
     </head>
 
     <body>
-        <h1>Adding Student</h1>
-        <h3>Please fill in all the fields in the form below to add a 
-            student:</h3>
-        <form method="post" action="">
+        <h1>Student Profile</h1>
+        <form method="post">
 
             <!--Student Information-->
             <label for="studentName">Name: </label>
@@ -24,24 +83,21 @@
             <input type="text" name="studentSurname" id="studentSurname" 
             required><br>
 
-            <label for="studentEmail">Email: </label>
-            <input type="email" name="studentEmail" id="studentEmail" 
-            required><br>
-
             <label for="studentPhoneNumber">Phone Number: </label>
             <input type="text" name="studentPhoneNumber" 
             id="studentPhoneNumber" required><br>
             
 
-            <label for="gender">Gender: </label>
-            <select name="gender" id="gender" required>
+            <label for="studentGender">Gender: </label>
+            <select name="studentGender" id="studentGender" required>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Other">Other</option>
             </select><br>
 
-            <label for="age">Age: </label>
-            <input type="number" name="age" id="age" required><br>
+            <label for="studentAge">Age: </label>
+            <input type="number" name="studentAge" id="studentAge" 
+            required><br>
 
             <label for="education">Current Education level: </label>
             <select name="education" id="education" required>
@@ -57,17 +113,6 @@
                 Please write your address below:</label><br>
             <textarea name="studentAddress" id="studentAddress" 
             cols="30" rows="10" required></textarea><br>
-
-            <p>Please enter a password that contains at least 8 characters 
-                and a combination of letters and numbers:</p>
-            <label for="studentPassword">Password: </label>
-            <input type="password" name="studentPassword" 
-            id="studentPassword" required><br>
-
-            <p>Please Confirm Your Password:</p>
-            <label for="studentPasswordCopy">Password: </label>
-            <input type="password" name="studentPasswordCopy" 
-            id="studentPasswordCopy" required><br>
 
 
             <!-- Guardian Information-->
@@ -106,9 +151,9 @@
                 </option>    
             </select><br>
 
-            <input type="submit" name="submit" value="Add Student">
+            <input type="submit" name="submit" value="Update Profile">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>

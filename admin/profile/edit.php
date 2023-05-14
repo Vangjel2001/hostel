@@ -32,6 +32,6 @@
             <input type="submit" name="submit" value="Update Profile">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>

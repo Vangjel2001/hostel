@@ -22,6 +22,6 @@
             <input type="submit" name="submit" value="Delete Student">
         </form>
 
-        <a href="view.html">Go Back</a>
+        <a href="view.php">Go Back</a>
     </body>
 </html>

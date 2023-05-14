@@ -22,6 +22,6 @@
             <input type="submit" name="submit" value="Delete Room">
         </form>
 
-        <a href="view.html">Cancel</a>
+        <a href="view.php">Cancel</a>
     </body>
 </html>
