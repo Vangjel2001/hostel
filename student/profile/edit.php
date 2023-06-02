@@ -22,6 +22,7 @@
         return;
     }
 
+    //check if the form has been submitted
     if(isset($_POST['submit']))
     {
         /*initialize the variables to store form input values for 
@@ -62,15 +63,15 @@
         //check if the guardian is underage
         if($_POST['guardianAge']<18)
         {
-            $_SESSION['error']="Your guardian should be 18 years old 
-            or older. Try entering another guardian.";
+            $_SESSION['error']="Your advocate should be 18 years old 
+            or older. Try entering another advocate.";
             header("Location: edit.php");
             return;
         }
         //check if the guardian has the same phone number as the student
         if($_POST['guardianPhoneNumber']==$_POST['studentPhoneNumber'])
         {
-            $_SESSION['error']="Your guardian should have a different 
+            $_SESSION['error']="Your advocate should have a different 
             phone number from yours.";
             header("Location: edit.php");
             return;
@@ -103,6 +104,9 @@
         return;
     }
 
+    //get the student and guardian information
+    $row=getStudentAndGuardianRow($_SESSION['studentID'], $pdo);
+
 ?>
 
 <!DOCTYPE html>
@@ -119,181 +123,162 @@
         <h1>Student Profile</h1>
         <form method="post">
 
-            <!--Student Information-->
+        <!-- Student Information -->
         <label for="studentName">Name: </label>
-        <input type="text" name="studentName" id="studentName"
-        <?php if(isset($_SESSION['studentName'])) { 
-            echo 'value="' . $_SESSION['studentName'] . '"'; 
-            } ?> required><br>
+        <input type="text" name="studentName" id="studentName" 
+        value="<?php echo isset($_SESSION['studentName']) ? 
+        $_SESSION['studentName'] : $row['studentName']; ?>" required><br>
 
         <label for="studentSurname">Surname: </label>
-        <input type="text" name="studentSurname" id="studentSurname"
-        <?php if(isset($_SESSION['studentSurname'])) { 
-        echo 'value="' . $_SESSION['studentSurname'] . '"'; 
-        } ?> required><br>
+        <input type="text" name="studentSurname" id="studentSurname" 
+        value="<?php echo isset($_SESSION['studentSurname']) ? 
+        $_SESSION['studentSurname'] : $row['studentSurname']; ?>" 
+        required><br>
 
         <label for="studentEmail">Email: </label>
-        <input type="email" name="studentEmail" id="studentEmail"
-        <?php if(isset($_SESSION['studentEmail'])) { 
-        echo 'value="' . $_SESSION['studentEmail'] . '"'; 
-        } ?> required><br>
+        <input type="email" name="studentEmail" id="studentEmail" 
+        value="<?php echo isset($_SESSION['studentEmail']) ? 
+        $_SESSION['studentEmail'] : $row['studentEmail']; ?>" required><br>
 
         <label for="studentPhoneNumber">Phone Number: </label>
-        <input type="text" name="studentPhoneNumber" id="studentPhoneNumber"
-        <?php if(isset($_SESSION['studentPhoneNumber'])) { 
-        echo 'value="' . $_SESSION['studentPhoneNumber'] . '"'; 
-        } ?> required><br>
-
+        <input type="text" name="studentPhoneNumber" 
+        id="studentPhoneNumber" value="<?php echo 
+        isset($_SESSION['studentPhoneNumber']) ? 
+        $_SESSION['studentPhoneNumber'] : $row['studentPhoneNumber']; ?>" 
+        required><br>
 
         <label for="studentGender">Gender: </label>
         <select name="studentGender" id="studentGender" required>
 
-        <option value="Male" <?php if(isset($_SESSION['studentGender']) 
-        && $_SESSION['studentGender'] == 'Male') { echo 'selected'; } ?>
+        <option value="Male" <?php echo (isset($_SESSION['studentGender']) 
+        && $_SESSION['studentGender'] == 'Male') ? 'selected' : 
+        ($row['studentGender'] == 'Male' ? 'selected' : ''); ?>
         >Male</option>
 
-        <option value="Female" <?php if(isset($_SESSION['studentGender']) 
-        && $_SESSION['studentGender'] == 'Female') { echo 'selected'; } ?>
-        >Female</option>
+        <option value="Female" <?php echo 
+        (isset($_SESSION['studentGender']) && $_SESSION['studentGender'] 
+        == 'Female') ? 'selected' : ($row['studentGender'] == 'Female' ? 
+        'selected' : ''); ?>>Female</option>
+        
+        <option value="Other" <?php echo 
+        (isset($_SESSION['studentGender']) && $_SESSION['studentGender'] 
+        == 'Other') ? 'selected' : ($row['studentGender'] == 'Other' ? 
+        'selected' : ''); ?>>Other</option>
 
-        <option value="Other" <?php if(isset($_SESSION['studentGender']) 
-        && $_SESSION['studentGender'] == 'Other') { echo 'selected'; } ?>
-        >Other</option>
         </select><br>
 
-
         <label for="studentAge">Age: </label>
-        <input type="number" name="studentAge" id="studentAge"
-        <?php if(isset($_SESSION['studentAge'])) { 
-        echo 'value="' . $_SESSION['studentAge'] . '"'; 
-        } ?> required><br>
-
+        <input type="number" name="studentAge" id="studentAge" 
+        value="<?php echo isset($_SESSION['studentAge']) ? 
+        $_SESSION['studentAge'] : $row['studentAge']; ?>" required><br>
 
         <label for="education">Current Education level: </label>
         <select name="education" id="education" required>
-        
-        <option value="High School" <?php if(isset($_SESSION['education']) 
-        && $_SESSION['education'] == 'High School') { echo 'selected'; } ?>
+
+        <option value="High School" 
+        <?php echo (isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'High School') ? 'selected' : 
+        ($row['education'] == 'High School' ? 'selected' : ''); ?>
         >I am a high school student.</option>
         
-        <option value="Bachelor" <?php if(isset($_SESSION['education']) && 
-        $_SESSION['education'] == 'Bachelor') { echo 'selected'; } ?>
+        <option value="Bachelor" 
+        <?php echo (isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'Bachelor') ? 'selected' : 
+        ($row['education'] == 'Bachelor' ? 'selected' : ''); ?>
         >I am a bachelor student.</option>
         
-        <option value="Master" <?php if(isset($_SESSION['education']) && 
-        $_SESSION['education'] == 'Master') { echo 'selected'; } ?>
+        <option value="Master" 
+        <?php echo (isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'Master') ? 'selected' : 
+        ($row['education'] == 'Master' ? 'selected' : ''); ?>
         >I am a master student.</option>
         
-        <option value="PHD" <?php if(isset($_SESSION['education']) && 
-        $_SESSION['education'] == 'PHD') { echo 'selected'; } ?>
-        >I am a phd student</option>
+        <option value="PHD" 
+        <?php echo (isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'PHD') ? 'selected' : 
+        ($row['education'] == 'PHD' ? 'selected' : ''); ?>
+        >I am a PhD student.</option>
+    
         </select><br>
 
-
-        <label for="studentAddress">Please write your address below:</label><br>
-
+        <label for="studentAddress">Please write your address below:
+        </label><br>
         <textarea name="studentAddress" id="studentAddress" cols="30" 
         rows="10" required>
-        <?php if(isset($_SESSION['studentAddress'])) { 
-        echo $_SESSION['studentAddress']; 
-        } ?>
+        <?php echo isset($_SESSION['studentAddress']) ? 
+        $_SESSION['studentAddress'] : $row['studentAddress']; ?>
         </textarea><br>
 
-        <p>Please enter a password that contains at least 8 characters 
-        and a combination of letters and numbers:</p>
-
-        <label for="studentPassword">Password: </label>
-        <input type="password" name="studentPassword" id="studentPassword" 
-        required
-
-        <?php if(isset($_SESSION['studentPassword'])) { 
-        echo 'value="' . $_SESSION['studentPassword'] . '"'; 
-        } ?>><br>
-
-        <p>Please Confirm Your Password:</p>
-
-        <label for="studentPasswordCopy">Password: </label>
-        <input type="password" name="studentPasswordCopy" 
-        id="studentPasswordCopy" required
-        <?php if(isset($_SESSION['studentPasswordCopy'])) { 
-        echo 'value="' . $_SESSION['studentPasswordCopy'] . '"'; 
-        } ?>><br>
-
-
-        <!-- Guardian Information-->
+        
+        <!-- Guardian Information -->
         <p>We need a person (like your father for example) that you can 
-        enter as your guardian.</p>
-        <label for="guardianName">Name: </label>
+            enter as your advocate.</p>
+
+        <label for="guardianName">Advocate Name: </label>
         <input type="text" name="guardianName" id="guardianName" required
+        value="<?php echo isset($_SESSION['guardianName']) ? 
+        $_SESSION['guardianName'] : $row['guardianName']; ?>"><br>
 
-        <?php if(isset($_SESSION['guardianName'])) { 
-        echo 'value="' . $_SESSION['guardianName'] . '"'; 
-        } ?>><br>
-
-        <label for="guardianSurname">Surname: </label>
+        <label for="guardianSurname">Advocate Surname: </label>
         <input type="text" name="guardianSurname" id="guardianSurname" 
-        required
+        required value="<?php echo isset($_SESSION['guardianSurname']) ? 
+        $_SESSION['guardianSurname'] : $row['guardianSurname']; ?>"><br>
 
-        <?php if(isset($_SESSION['guardianSurname'])) { 
-        echo 'value="' . $_SESSION['guardianSurname'] . '"'; 
-        } ?>><br>
-
-        <label for="guardianAge">Age: </label>
+        <label for="guardianAge">Advocate Age: </label>
         <input type="number" name="guardianAge" id="guardianAge" required
+        value="<?php echo isset($_SESSION['guardianAge']) ? 
+        $_SESSION['guardianAge'] : $row['guardianAge']; ?>"><br>
 
-        <?php if(isset($_SESSION['guardianAge'])) { 
-        echo 'value="' . $_SESSION['guardianAge'] . '"'; 
-        } ?>><br>
-
-        <label for="guardianPhoneNumber">Phone Number: </label>
+        <label for="guardianPhoneNumber">Advocate Phone Number: </label>
         <input type="text" name="guardianPhoneNumber" 
         id="guardianPhoneNumber" required
+        value="<?php echo isset($_SESSION['guardianPhoneNumber']) ? 
+        $_SESSION['guardianPhoneNumber'] : $row['guardianPhoneNumber']; 
+        ?>"><br>
 
-        <?php if(isset($_SESSION['guardianPhoneNumber'])) { 
-        echo 'value="' . $_SESSION['guardianPhoneNumber'] . '"'; 
-        } ?>><br>
-
-        <label for="guardianEmail">Email: </label>
+        <label for="guardianEmail">Advocate Email: </label>
         <input type="email" name="guardianEmail" id="guardianEmail" 
-        required
-
-        <?php if(isset($_SESSION['guardianEmail'])) { 
-        echo 'value="' . $_SESSION['guardianEmail'] . '"'; 
-        } ?>><br>
-
+        required value="<?php echo isset($_SESSION['guardianEmail']) ? 
+        $_SESSION['guardianEmail'] : $row['guardianEmail']; ?>"><br>
 
         <p>What is your relationship with this person?</p>
+
         <label for="guardianRelation">This person is my: </label>
         <select name="guardianRelation" id="guardianRelation" required>
 
-        <option value="Brother" 
-        <?php if(isset($_SESSION['guardianRelation']) && 
-        $_SESSION['guardianRelation'] == 'Brother') { echo 'selected'; } ?>
+        <option value="Brother" <?php echo 
+        (isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Brother') ? 'selected' : 
+        ($row['guardianRelation'] == 'Brother' ? 'selected' : ''); ?>
         >Brother</option>
         
         <option value="Sister" 
-        <?php if(isset($_SESSION['guardianRelation']) && 
-        $_SESSION['guardianRelation'] == 'Sister') { echo 'selected'; } ?>
+        <?php echo (isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Sister') ? 'selected' : 
+        ($row['guardianRelation'] == 'Sister' ? 'selected' : ''); ?>
         >Sister</option>
         
-        <option value="Mother" 
-        <?php if(isset($_SESSION['guardianRelation']) && 
-        $_SESSION['guardianRelation'] == 'Mother') { echo 'selected'; } ?>
+        <option value="Mother" <?php 
+        echo (isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Mother') ? 'selected' : 
+        ($row['guardianRelation'] == 'Mother' ? 'selected' : ''); ?>
         >Mother</option>
         
-        <option value="Father" 
-        <?php if(isset($_SESSION['guardianRelation']) && 
-        $_SESSION['guardianRelation'] == 'Father') { echo 'selected'; } ?>
+        <option value="Father" <?php echo 
+        (isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Father') ? 'selected' : 
+        ($row['guardianRelation'] == 'Father' ? 'selected' : ''); ?>
         >Father</option>
         
         <option value="Other Relationship" 
-        <?php if(isset($_SESSION['guardianRelation']) && 
-        $_SESSION['guardianRelation'] == 'Other Relationship') 
-        { echo 'selected'; } ?>>Other Relationship</option>
+        <?php echo (isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Other Relationship') ? 
+        'selected' : ($row['guardianRelation'] == 'Other Relationship' ? 
+        'selected' : ''); ?>>Other Relationship</option>
+
         </select><br>
 
-
-            <input type="submit" name="submit" value="Update Profile">
+        <input type="submit" name="submit" value="Update Profile">
         </form>
 
         <a href="../../prices.php">Room Prices</a>

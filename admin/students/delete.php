@@ -42,7 +42,7 @@
             $sql="DELETE FROM guardian 
             WHERE guardianID=$guardianID;";
             $pdo->query($sql);
-            $_SESSION['success']="The guardian was successfully deleted!";
+            $_SESSION['success']="The advocate was successfully deleted!";
         }
 
         //store the studentID

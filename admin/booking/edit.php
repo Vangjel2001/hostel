@@ -161,16 +161,63 @@
             <p>Do you want to have breakfast, lunch or dinner included?</p>
             <label for="foodStatus">Choose one of the options below: </label>
             <select name="foodStatus" id="foodStatus" required>
-                <option value="Just Breakfast">Just Breakfast</option>
-                <option value="Just Lunch">Just Lunch</option>
-                <option value="Just Dinner">Just Dinner</option>
-                <option value="Breakfast and Lunch">Breakfast 
-                    and Lunch</option>
-                <option value="Breakfast and Dinner">Breakfast and Dinner</option>
-                <option value="Lunch and Dinner">Lunch and Dinner</option>
-                <option value="Breakfast, Lunch and Dinner">Breakfast, Lunch 
-                    and Dinner</option>
-                <option value="No food">I do not want any meals</option>
+    
+            <option value="Just Breakfast" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Breakfast') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Just Breakfast') ? 'selected' : ''; ?>
+            >Just Breakfast</option>
+    
+            <option value="Just Lunch" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Lunch') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Just Lunch') ? 'selected' : ''; ?>
+            >Just Lunch</option>
+    
+            <option value="Just Dinner" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Dinner') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Just Dinner') ? 'selected' : ''; ?>>Just Dinner</option>
+    
+            <option value="Breakfast and Lunch" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast and Lunch') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Breakfast and Lunch') ? 'selected' : ''; ?>
+            >Breakfast and Lunch</option>
+    
+            <option value="Breakfast and Dinner" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast and Dinner') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Breakfast and Dinner') ? 'selected' : ''; ?>
+            >Breakfast and Dinner</option>
+    
+            <option value="Lunch and Dinner" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Lunch and Dinner') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Lunch and Dinner') ? 'selected' : ''; ?>
+            >Lunch and Dinner</option>
+    
+            <option value="Breakfast, Lunch and Dinner" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast, Lunch and Dinner') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'Breakfast, Lunch and Dinner') ? 'selected' : ''; ?>
+            >Breakfast, Lunch and Dinner</option>
+    
+            <option value="No food" <?php 
+            echo (isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'No food') || 
+            (!isset($_SESSION['foodStatus']) && $row['foodStatus'] == 
+            'No food') ? 'selected' : ''; ?>
+            >I do not want any meals</option>
+
+
             </select><br>
 
             <input type="hidden" name="studentID" 

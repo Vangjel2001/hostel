@@ -25,6 +25,25 @@
     //check if the form has been submitted
     if(isset($_POST['submit']))
     {
+        /*store the submitted information inside the session 
+        for redisplaying purposes*/
+        $_SESSION['studentEmail']=$_POST['studentEmail'];
+        $_SESSION['roomNumber']=$_POST['roomNumber'];
+        $_SESSION['startDate']=$_POST['startDate'];
+        $_SESSION['endDate']=$_POST['endDate'];
+        $_SESSION['foodStatus']=$_POST['foodStatus'];
+
+
+        /*check if a reservation for the same room and the same student 
+        exists already*/ 
+        if(existingReservation($pdo))
+        {
+            $_SESSION['error']="You cannot make another booking with 
+            the same student and the same room.";
+            header("Location: add.php");
+            return;
+        }
+
 
         /*check if the reservation start Date was set further than its 
         end Date*/
@@ -111,55 +130,93 @@
         <h1>Make A Reservation</h1>
         <form method="post" action="">
             <label for="studentEmail">Student Email: </label>
-            <select name="studentEmail" id="studentEmail" 
-            required>
+            <select name="studentEmail" id="studentEmail" required>
             <?php 
-                //display all the student emails as select options
-                while($row=$stmt->fetch(PDO::FETCH_ASSOC))
-                {
-                    $studentEmail=$row['studentEmail'];
-                    echo "<option value=$studentEmail>
-                    $studentEmail</option>";
-                }
+            // Display all the student emails as select options
+            while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $studentEmail = $row['studentEmail'];
+                echo '<option value="' . $studentEmail . '" ' . 
+                (isset($_SESSION['studentEmail']) && 
+                $_SESSION['studentEmail'] == $studentEmail ? 'selected' : 
+                '') . '>' . $studentEmail . '</option>';
+            }
             ?>
-            </select><br>
+        </select><br>
+
 
             <label for="roomNumber">Room Number: </label>
             <select name="roomNumber" id="roomNumber" required>
             <?php 
-                /*get the room numbers of the rooms that are not full*/
-                    $stmt=getNotFullRoomNumbers($pdo);
-                    while($row=$stmt->fetch(PDO::FETCH_ASSOC))
-                    {
-                        //display the room numbers as select options
-                        $roomNumber=(int)$row['roomNumber'];
-                        echo '<option value="'.$roomNumber.'">'.
-                        $roomNumber.'</option>'; 
-                    }
-                ?>
+            // Get the room numbers of the rooms that are not full
+            $stmt = getNotFullRoomNumbers($pdo);
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                // Display the room numbers as select options
+                $roomNumber = (int)$row['roomNumber'];
+                echo '<option value="' . $roomNumber . '" ' . 
+                (isset($_SESSION['roomNumber']) && 
+                $_SESSION['roomNumber'] == $roomNumber ? 'selected' : 
+                '') . '>' . $roomNumber . '</option>'; 
+            }
+            ?>
             </select><br>
 
             <label for="startDate">Reservation Start Date: </label>
             <input type="date" name="startDate" id="startDate" 
-            min=<?=$minDate?> required><br>
+            min="<?=$minDate?>" required 
+            value="<?=(isset($_SESSION['startDate'])) ? 
+            $_SESSION['startDate'] : '' ?>"><br>
 
             <label for="endDate">Reservation End Date: </label>
             <input type="date" name="endDate" id="endDate" 
-            min=<?=$minDate?> required><br>
+            min="<?=$minDate?>" required 
+            value="<?=(isset($_SESSION['endDate'])) ? 
+            $_SESSION['endDate'] : '' ?>"><br>
 
             <p>Do you want to have breakfast, lunch or dinner included?</p>
-            <label for="foodStatus">Choose one of the options below: </label>
+            <label for="foodStatus">Choose one of the options below: 
+            </label>
             <select name="foodStatus" id="foodStatus" required>
-                <option value="Just Breakfast">Just Breakfast</option>
-                <option value="Just Lunch">Just Lunch</option>
-                <option value="Just Dinner">Just Dinner</option>
-                <option value="Breakfast and Lunch">Breakfast 
-                    and Lunch</option>
-                <option value="Breakfast and Dinner">Breakfast and Dinner</option>
-                <option value="Lunch and Dinner">Lunch and Dinner</option>
-                <option value="Breakfast, Lunch and Dinner">Breakfast, Lunch 
-                    and Dinner</option>
-                <option value="No food">I do not want any meals</option>
+            
+            <option value="Just Breakfast" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Breakfast') ? 'selected' : 
+            '' ?>>Just Breakfast</option>
+            
+            <option value="Just Lunch" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Lunch') ? 'selected' : '' ?>
+            >Just Lunch</option>
+            
+            <option value="Just Dinner" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Just Dinner') ? 'selected' : '' ?>
+            >Just Dinner</option>
+    
+            <option value="Breakfast and Lunch" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast and Lunch') ? 
+            'selected' : '' ?>>Breakfast and Lunch</option>
+    
+            <option value="Breakfast and Dinner" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast and Dinner') ? 
+            'selected' : '' ?>>Breakfast and Dinner</option>
+    
+            <option value="Lunch and Dinner" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Lunch and Dinner') ? 
+            'selected' : '' ?>>Lunch and Dinner</option>
+    
+            <option value="Breakfast, Lunch and Dinner" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'Breakfast, Lunch and Dinner') ? 
+            'selected' : '' ?>>Breakfast, Lunch and Dinner</option>
+    
+            <option value="No food" 
+            <?=(isset($_SESSION['foodStatus']) && 
+            $_SESSION['foodStatus'] == 'No food') ? 'selected' : '' ?>
+            >I do not want any meals</option>
+
             </select><br>
 
             <input type="submit" name="submit" value="Book Room">

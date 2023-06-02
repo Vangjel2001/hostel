@@ -87,8 +87,8 @@
         //check if the guardian is underage
         if($_POST['guardianAge']<18)
         {
-            $_SESSION['error']="The guardian should be 18 years old 
-            or older. Try entering another guardian.";
+            $_SESSION['error']="The advocate should be 18 years old 
+            or older. Try entering another advocate.";
             header("Location: add.php");
             return;
         }
@@ -96,7 +96,7 @@
         //check if the guardian has the same email as the student
         if($_POST['guardianEmail']==$_POST['studentEmail'])
         {
-            $_SESSION['error']="The guardian should have a different 
+            $_SESSION['error']="The advocate should have a different 
             email from the student's.";
             header("Location: add.php");
             return;
@@ -105,7 +105,7 @@
         //check if the guardian has the same phone number as the student
         if($_POST['guardianPhoneNumber']==$_POST['studentPhoneNumber'])
         {
-            $_SESSION['error']="The guardian should have a different 
+            $_SESSION['error']="The advocate should have a different 
             phone number from the student's.";
             header("Location: add.php");
             return;
@@ -232,8 +232,7 @@
         } ?>
         </textarea><br>
 
-        <p>Please enter a password that contains at least 8 characters 
-        and a combination of letters and numbers:</p>
+        <p>Please enter a password:</p>
 
         <label for="studentPassword">Password: </label>
         <input type="password" name="studentPassword" id="studentPassword" 
@@ -256,15 +255,15 @@
 
         <!-- Guardian Information-->
         <p>We need a person (like the student's father for example) 
-        that you can enter as a guardian.</p>
-        <label for="guardianName">Name: </label>
+        that you can enter as an advocate.</p>
+        <label for="guardianName">Advocate Name: </label>
         <input type="text" name="guardianName" id="guardianName" required
 
         <?php if(isset($_SESSION['guardianName'])) { 
         echo 'value="' . $_SESSION['guardianName'] . '"'; 
         } ?>><br>
 
-        <label for="guardianSurname">Surname: </label>
+        <label for="guardianSurname">Advocate Surname: </label>
         <input type="text" name="guardianSurname" id="guardianSurname" 
         required
 
@@ -272,14 +271,14 @@
         echo 'value="' . $_SESSION['guardianSurname'] . '"'; 
         } ?>><br>
 
-        <label for="guardianAge">Age: </label>
+        <label for="guardianAge">Advocate Age: </label>
         <input type="number" name="guardianAge" id="guardianAge" required
 
         <?php if(isset($_SESSION['guardianAge'])) { 
         echo 'value="' . $_SESSION['guardianAge'] . '"'; 
         } ?>><br>
 
-        <label for="guardianPhoneNumber">Phone Number: </label>
+        <label for="guardianPhoneNumber">Advocate Phone Number: </label>
         <input type="text" name="guardianPhoneNumber" 
         id="guardianPhoneNumber" required
 
@@ -287,7 +286,7 @@
         echo 'value="' . $_SESSION['guardianPhoneNumber'] . '"'; 
         } ?>><br>
 
-        <label for="guardianEmail">Email: </label>
+        <label for="guardianEmail">Advocate Email: </label>
         <input type="email" name="guardianEmail" id="guardianEmail" 
         required
 
@@ -297,7 +296,7 @@
 
 
         <p>What is the student's relationship with this person?</p>
-        <label for="guardianRelation">This person is my: </label>
+        <label for="guardianRelation">This person is the student's: </label>
         <select name="guardianRelation" id="guardianRelation" required>
 
         <option value="Brother" 

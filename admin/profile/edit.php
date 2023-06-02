@@ -54,6 +54,9 @@
 
     }
 
+    //get the administrator information
+    $row=getAdministratorRow($pdo);
+
 ?>
 
 <!DOCTYPE html>
@@ -71,42 +74,39 @@
         <h3>Enter the new log in credentials below:</h3>
 
         <form method="post" action="">
-            <label for="adminName">Name: </label>
-            <input type="text" name="adminName" 
-            id="adminName" <?php if(isset($_SESSION['adminName'])) { 
-            echo 'value="' . $_SESSION['adminName'] . '"'; 
-            } ?>required><br>
+    
+        <label for="adminName">Name: </label>
+        <input type="text" name="adminName" id="adminName" 
+        <?php echo (isset($_SESSION['adminName'])) ? 'value="' . 
+        $_SESSION['adminName'] . '"' : 'value="' . $row['adminName'] . '"';
+         ?> required><br>
 
-            <p>Please enter a password that contains at least 8 characters 
-                and a combination of letters and numbers:</p>
-            <label for="adminPassword">Password: </label>
-            <input type="password" name="adminPassword" 
-            id="adminPassword" <?php if(isset($_SESSION['adminPassword'])) { 
-            echo 'value="' . $_SESSION['adminPassword'] . '"'; 
-            } ?> required><br>
+    
+        <p>Please enter a password:</p>
+        <label for="adminPassword">Password: </label>
+        <input type="password" name="adminPassword" id="adminPassword" 
+        <?php echo (isset($_SESSION['adminPassword'])) ? 'value="' . 
+        $_SESSION['adminPassword'] . '"' : ''; ?> required><br>
 
-            <p>Please Confirm Your Password:</p>
-            <label for="adminPasswordCopy">Password: </label>
-            <input type="password" name="adminPasswordCopy" 
-            id="adminPasswordCopy"<?php 
-            if(isset($_SESSION['adminPasswordCopy'])) { 
-            echo 'value="' . $_SESSION['adminPasswordCopy'] . '"'; 
-            } ?> required><br>
+        <p>Please Confirm Your Password:</p>
+        <label for="adminPasswordCopy">Password: </label>
+        <input type="password" name="adminPasswordCopy" 
+        id="adminPasswordCopy" required><br>
 
-            <label for="adminEmail">Email: </label>
-            <input type="text" name="adminEmail" id="adminEmail" 
-            <?php if(isset($_SESSION['adminEmail'])) { 
-            echo 'value="' . $_SESSION['adminEmail'] . '"'; 
-            } ?>required>
+        <label for="adminEmail">Email: </label>
+        <input type="text" name="adminEmail" id="adminEmail" 
+        <?php echo (isset($_SESSION['adminEmail'])) ? 'value="' . 
+        $_SESSION['adminEmail'] . '"' : 'value="' . $row['adminEmail'] . 
+        '"'; ?> required>
 
-            <label for="adminPhoneNumber">Phone Number: </label>
-            <input type="text" name="adminPhoneNumber" 
-            id="adminPhoneNumber"<?php 
-            if(isset($_SESSION['adminPhoneNumber'])) { 
-            echo 'value="' . $_SESSION['adminPhoneNumber'] . '"'; 
-            } ?> required>
+        <label for="adminPhoneNumber">Phone Number: </label>
+        <input type="text" name="adminPhoneNumber" id="adminPhoneNumber" 
+        <?php echo (isset($_SESSION['adminPhoneNumber'])) ? 'value="' . 
+        $_SESSION['adminPhoneNumber'] . '"' : 'value="' . 
+        $row['adminPhoneNumber'] . '"'; ?> required>
 
-            <input type="submit" name="submit" value="Update Profile">
+
+        <input type="submit" name="submit" value="Update Profile">
         </form>
 
         <a href="view.php">Cancel</a>

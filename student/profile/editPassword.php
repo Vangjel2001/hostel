@@ -66,8 +66,7 @@
         
         <form method="post" action="">
 
-            <p>Please enter a password that contains at least 8 characters 
-                and a combination of letters and numbers:</p>
+            <p>Please enter a password:</p>
             <label for="studentPassword">Password: </label>
             <input type="password" name="studentPassword" 
             id="studentPassword" required><br>

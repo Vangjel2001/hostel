@@ -253,6 +253,21 @@
     //insert a guardian in the guardian table
     function insertRowIntoGuardian($pdo)
     {
+        //store the submitted guardian email
+        $guardianEmail=$_POST['guardianEmail'];
+
+        //check if there is an existing guardian with that email
+        $sql="SELECT * 
+        FROM guardian 
+        WHERE guardianEmail=:zip;";
+
+        $stmt=$pdo->prepare($sql);
+        $stmt->bindParam(":zip", $guardianEmail);
+        $stmt->execute();
+
+        if($stmt->rowCount()!=0)
+        return;
+
         $sql="INSERT INTO guardian(guardianName, guardianSurname, 
         guardianPhoneNumber, guardianEmail, guardianAge) 
         VALUES(:guardianName, :guardianSurname, :guardianPhoneNumber, 
@@ -453,6 +468,27 @@
         $stmt=$pdo->query($sql);
 
         return $stmt;
+    }
+
+    function existingReservation($pdo)
+    {
+        $studentEmail=$_POST['studentEmail'];
+        $roomNumber=$_POST['roomNumber'];
+
+        $row=returnStudentRow($studentEmail, $pdo);
+        $studentID=$row['studentID'];
+
+        $sql="SELECT * 
+        FROM booking 
+        WHERE studentID=$studentID AND roomNumber=$roomNumber;";
+
+        $stmt=$pdo->query($sql);
+
+        if($stmt->rowCount()==0)
+        return false;
+        else
+        return true;
+
     }
 
     function getDateDifferenceInDays($startDate, $endDate)

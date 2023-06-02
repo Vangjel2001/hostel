@@ -25,13 +25,18 @@
     if(isset($_POST['submit']) && isset($_POST['studentID']) && 
     isset($_POST['roomNumber']))
     {
+        $_SESSION['startDate']=$_POST['startDate'];
+        $_SESSION['endDate']=$_POST['endDate'];
+        $_SESSION['foodStatus']=$_POST['foodStatus'];
+
         /*check if the reservation start Date was set further than its 
         end Date*/
         if($_POST['startDate']>$_POST['endDate'])
         {
             $_SESSION['error']="Your reservation starting date cannot be 
             further ahead in time than your reservation ending date.";
-            header("Location: edit.php");
+            header("Location: edit.php?studentID=" . 
+            $_POST['studentID'] . "&roomNumber=" . $_POST['roomNumber']);
             return;
         }
 
@@ -56,26 +61,20 @@
         //store values in variables with shorter names
         $studentID=$_SESSION['studentID'];
 
-        $newRoomNumber=$_POST['roomNumber'];
-        $oldRoomNumber=$_SESSION['roomNumber'];
-
         $startDate=$_POST['startDate'];
         $endDate=$_POST['endDate'];
         $foodStatus=$_POST['foodStatus'];
+        $roomNumber=$_POST['roomNumber'];
 
         //update booking row
         $sql="UPDATE booking 
-        SET roomNumber=$newRoomNumber, duration=$duration, 
-        startDate='$startDate', endDate='$endDate', totalFee=$totalFee, 
-        foodStatus='$foodStatus' 
-        WHERE studentID=$studentID AND roomNumber=$oldRoomNumber;";
+        SET duration=$duration, startDate='$startDate', 
+        endDate='$endDate', totalFee=$totalFee, foodStatus='$foodStatus' 
+        WHERE studentID=$studentID AND roomNumber=$roomNumber;";
 
         $pdo->query($sql);
 
         $_SESSION['success']="Your reservation was updated successfully!";
-        
-        //delete the old roomNumber from $_SESSION
-        unset($_SESSION['roomNumber']);
 
         header("Location: view.php");
         return;
@@ -98,10 +97,6 @@
 
     //get the details of the reservation
     $row=getBookingInfo($pdo);
-
-    //store the old roomNumber inside $_SESSION
-    $roomNumber=$row['roomNumber'];
-    $_SESSION['roomNumber']=$roomNumber;
 
     //store the reservation details in variables with shorter names
     $startDate=$row['startDate'];
@@ -131,37 +126,20 @@
             <p>How long are you staying at our hostel?</p>
             <label for="startDate">Reservation Starting Date: </label>
             <input type="date" name="startDate" id="startDate" 
-            value="<?=$startDate ?>" required>
+            value="<?php echo isset($_SESSION['startDate']) ? 
+            $_SESSION['startDate'] : $startDate; ?>" required>
             <br>
 
             <label for="endDate">Reservation Ending Date: </label>
             <input type="date" name="endDate" id="endDate" 
-            value="<?=$endDate ?>" required>
+            value="<?php echo isset($_SESSION['endDate']) ? 
+            $_SESSION['endDate'] : $endDate; ?>" required>
             <br>
 
-            <label for="roomNumber">Room Number</label>
-            <select name="roomNumber" id="roomNumber" required>
-
-            <option value="<?=$_GET['roomNumber']?>"> 
-                <?=$_GET['roomNumber']?></option> 
-                <?php
-                /*get the room numbers of the rooms that do not have 
-                any students residing in them*/
-                    $stmt=getFreeRoomNumbers($pdo);
-                    while($row=$stmt->fetch(PDO::FETCH_ASSOC))
-                    {
-                        //display the room numbers as select options
-                        $roomNumber=(int)$row['roomNumber'];
-                        echo '<option value="'.$roomNumber.'">'.
-                        $roomNumber.'</option>'; 
-                    }
-                ?>
-
-            </select><br>
-
             <p>Do you want to have breakfast, lunch or dinner included?</p>
-            <label for="foodStatus">Choose one of the options below: </label>
-            <select name="foodStatus" id="foodStatus" required>
+            <label for="foodStatus">Choose one of the options below: 
+            </label>
+           <!-- <select name="foodStatus" id="foodStatus" required>
                 <option value="Just Breakfast">Just Breakfast</option>
                 <option value="Just Lunch">Just Lunch</option>
                 <option value="Just Dinner">Just Dinner</option>
@@ -172,7 +150,55 @@
                 <option value="Breakfast, Lunch and Dinner">Breakfast, Lunch 
                     and Dinner</option>
                 <option value="No food">I do not want any meals</option>
-            </select><br>
+            </select><br> -->
+
+    
+    <select name="foodStatus" id="foodStatus" required>
+
+    <option value="Just Breakfast" 
+    <?php echo (isset($_SESSION['foodStatus']) 
+    && $_SESSION['foodStatus'] == 'Just Breakfast') ? 'selected' : 
+    (($foodStatus == 'Just Breakfast') ? 'selected' : ''); ?>
+    >Just Breakfast</option>
+
+    <option value="Just Lunch" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus']
+     == 'Just Lunch') ? 'selected' : (($foodStatus == 'Just Lunch') ? 
+     'selected' : ''); ?>>Just Lunch</option>
+    <option value="Just Dinner" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'Just Dinner') ? 'selected' : (($foodStatus == 'Just Dinner') ? 
+    'selected' : ''); ?>>Just Dinner</option>
+
+    <option value="Breakfast and Lunch" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'Breakfast and Lunch') ? 'selected' : (($foodStatus == 
+    'Breakfast and Lunch') ? 'selected' : ''); ?>
+    >Breakfast and Lunch</option>
+
+    <option value="Breakfast and Dinner" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'Breakfast and Dinner') ? 'selected' : 
+    (($foodStatus == 'Breakfast and Dinner') ? 'selected' : ''); ?>
+    >Breakfast and Dinner</option>
+
+    <option value="Lunch and Dinner" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'Lunch and Dinner') ? 'selected' : (($foodStatus == 
+    'Lunch and Dinner') ? 'selected' : ''); ?>
+    >Lunch and Dinner</option>
+
+    <option value="Breakfast, Lunch and Dinner" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'Breakfast, Lunch and Dinner') ? 'selected' : 
+    (($foodStatus == 'Breakfast, Lunch and Dinner') ? 'selected' : ''); ?>
+    >Breakfast, Lunch and Dinner</option>
+
+    <option value="No food" 
+    <?php echo (isset($_SESSION['foodStatus']) && $_SESSION['foodStatus'] 
+    == 'No food') ? 'selected' : (($foodStatus == 'No food') ? 'selected' :
+     ''); ?>>I do not want any meals</option>
+    </select><br>
 
             <input type="hidden" name="studentID" 
             value=<?=$_GET['studentID']?>>

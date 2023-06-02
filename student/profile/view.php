@@ -56,16 +56,15 @@
         <p>Address: <?php echo $row['studentAddress'] ?></p>
         <p></p>
 
-        <p>Guardian Name: <?php echo $row['guardianName'] ?></p>
-        <p>Guardian Surname: <?php echo $row['guardianSurname'] ?></p>
-        <p>Guardian Age: <?php echo $row['guardianAge'] ?></p>
-        <p>Guardian Phone Number: 
+        <p>Advocate Name: <?php echo $row['guardianName'] ?></p>
+        <p>Advocate Surname: <?php echo $row['guardianSurname'] ?></p>
+        <p>Advocate Age: <?php echo $row['guardianAge'] ?></p>
+        <p>Advocate Phone Number: 
             <?php echo $row['guardianPhoneNumber'] ?></p>
-        <p>Guardian Email Address: <?php echo $row['guardianEmail'] ?></p>
+        <p>Advocate Email Address: <?php echo $row['guardianEmail'] ?></p>
 
-        <a href="edit.php?studentID=<?=$studentID?>">Edit Profile</a>
-        <a href="editPassword.php?studentID=<?=$studentID?>">
-        Change Password</a>
+        <a href="edit.php">Edit Profile</a>
+        <a href="editPassword.php">Change Password</a>
 
         <a href="../../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>

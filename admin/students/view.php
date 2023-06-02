@@ -40,12 +40,12 @@
 <html>
     <head>
     <link rel="stylesheet" href="../../style.css">
-        <title>Students And Student Guardians</title>
+        <title>Students And Student Advocates</title>
     </head>
 
     <body>
-        <h1>Students And Student Guardians</h1>
-        <h3>Below is the information for each student and guardian:</h3>
+        <h1>Students And Student Advocates</h1>
+        <h3>Below is the information for each student and advocate:</h3>
 
         <table border="1">
             <tr>
@@ -58,13 +58,13 @@
                 <th>Student Age</th>
                 <th>Student Education</th>
                 <th>Student Address</th>
-                <th>Guardian Relationship</th>
-                <th>Guardian ID</th>
-                <th>Guardian Name</th>
-                <th>Guardian Surname</th>
-                <th>Guardian Age</th>
-                <th>Guardian Phone Number</th>
-                <th>Guardian Email</th>
+                <th>Advocate Relationship</th>
+                <th>Advocate ID</th>
+                <th>Advocate Name</th>
+                <th>Advocate Surname</th>
+                <th>Advocate Age</th>
+                <th>Advocate Phone Number</th>
+                <th>Advocate Email</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -101,7 +101,7 @@
             ?>
         </table>
 
-        <a href="add.php">Add a student and guardian</a>
+        <a href="add.php">Add a student and advocate</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
     </body>

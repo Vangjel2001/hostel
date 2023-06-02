@@ -79,8 +79,8 @@
         //check if the guardian is underage
         if($_POST['guardianAge']<18)
         {
-            $_SESSION['error']="Your guardian should be 18 years old 
-            or older. Try entering another guardian.";
+            $_SESSION['error']="Your advocate should be 18 years old 
+            or older. Try entering another advocate.";
             header("Location: signup.php");
             return;
         }
@@ -88,7 +88,7 @@
         //check if the guardian has the same email as the student
         if($_POST['guardianEmail']==$_POST['studentEmail'])
         {
-            $_SESSION['error']="Your guardian should have a different 
+            $_SESSION['error']="Your advocate should have a different 
             email from yours.";
             header("Location: signup.php");
             return;
@@ -97,7 +97,7 @@
         //check if the guardian has the same phone number as the student
         if($_POST['guardianPhoneNumber']==$_POST['studentPhoneNumber'])
         {
-            $_SESSION['error']="Your guardian should have a different 
+            $_SESSION['error']="Your advocate should have a different 
             phone number from yours.";
             header("Location: signup.php");
             return;
@@ -239,8 +239,7 @@
         } ?>
         </textarea><br>
 
-        <p>Please enter a password that contains at least 8 characters 
-        and a combination of letters and numbers:</p>
+        <p>Please enter a password:</p>
 
         <label for="studentPassword">Password: </label>
         <input type="password" name="studentPassword" id="studentPassword" 
@@ -261,7 +260,7 @@
 
         <!-- Guardian Information-->
         <p>We need a person (like your father for example) that you can 
-        enter as your guardian.</p>
+        enter as your advocate.</p>
         <label for="guardianName">Name: </label>
         <input type="text" name="guardianName" id="guardianName" required
 

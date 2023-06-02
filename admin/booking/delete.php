@@ -94,8 +94,8 @@
         <p>Food Status: <?=$row['foodStatus']?></p>
         <p>Reservation Start Date: <?=$row['startDate']?></p>
         <p>Reservation End Date: <?=$row['endDate']?></p>
-        <p>Reservation Duration: <?=$row['duration']?></p>
-        <p>Total Price: <?=$row['totalFee']?></p>
+        <p>Reservation Duration: <?=$row['duration']?> days</p>
+        <p>Total Price: <?=$row['totalFee']?> ALL</p>
 
         <form method="post" action="">
             <input type="hidden" name="studentID" 

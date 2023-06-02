@@ -44,11 +44,21 @@
         </nav>
         
         <!--A bit of advertising-->
-
+        <h3>Welcome to our Student Hostel!</h3>
+        <p>Experience comfortable and affordable accommodation 
+        options.</p>
+        <p>Enjoy delicious meals and impeccable cleaning service.</p>
+        <p>Explore recreational facilities for relaxation and 
+        leisure.</p>
+        <p>Join our vibrant community and create unforgettable 
+        memories.</p>
+        <p></p>
 
         <!--Explanation on how to navigate the website-->
         <h3>How to navigate this application</h3>
 
+        <p>If you want to check out the affordable prices we 
+            offer, click "Room Prices".</p>
         <p>If you are a new customer, click 
             "Sign Up And Make A Reservation".</p>
         <p>If you are an existing customer, click "Log In".</p>
@@ -58,9 +68,7 @@
             "Terms of use"</p>
         <p>If you are the administrator, click "Administrator Log In"</p>
         <p>If you want to go to the home page, click "Home"</p>
-        <p>If you want to check out the affordable prices we 
-            offer, click "Room Prices".
-        </p>
+        
 
     </body>
 </html>
