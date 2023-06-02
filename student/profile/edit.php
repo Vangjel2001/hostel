@@ -18,12 +18,47 @@
     {
         $_SESSION['error']="Please log in or sign up first in order 
         to continue.";
-        header("Location: C:/xampp\htdocs\hostel\home.php");
+        header("Location: ../../home.php");
         return;
     }
 
     if(isset($_POST['submit']))
     {
+        /*initialize the variables to store form input values for 
+        redisplaying purposes*/
+        $_SESSION['studentName'] = htmlspecialchars($_POST['studentName']);
+        $_SESSION['studentSurname'] = 
+        htmlspecialchars($_POST['studentSurname']);
+        $_SESSION['studentEmail'] = 
+        htmlspecialchars($_POST['studentEmail']);
+        $_SESSION['studentPhoneNumber'] = 
+        htmlspecialchars($_POST['studentPhoneNumber']);
+        $_SESSION['studentGender'] = 
+        htmlspecialchars($_POST['studentGender']);
+        $_SESSION['guardianRelation'] = 
+        htmlspecialchars($_POST['guardianRelation']);
+        $_SESSION['studentAge'] = htmlspecialchars($_POST['studentAge']);
+        $_SESSION['education'] = htmlspecialchars($_POST['education']);
+        $_SESSION['studentAddress'] = 
+        htmlspecialchars($_POST['studentAddress']);
+        $_SESSION['studentPassword'] = 
+        htmlspecialchars($_POST['studentPassword']);
+        $_SESSION['studentPasswordCopy'] =
+        htmlspecialchars($_POST['studentPasswordCopy']);
+
+        $_SESSION['guardianName'] = 
+        htmlspecialchars($_POST['guardianName']);
+        $_SESSION['guardianSurname'] = 
+        htmlspecialchars($_POST['guardianSurname']);
+        $_SESSION['guardianPhoneNumber'] = 
+        htmlspecialchars($_POST['guardianPhoneNumber']);
+        $_SESSION['guardianEmail'] = 
+        htmlspecialchars($_POST['guardianEmail']);
+        $_SESSION['guardianAge'] = 
+        htmlspecialchars($_POST['guardianAge']);
+
+
+
         //check if the guardian is underage
         if($_POST['guardianAge']<18)
         {
@@ -41,13 +76,24 @@
             return;
         }
 
+         //check if the password has not been confirmed correctly
+         if($_POST['studentPassword']!==$_POST['studentPasswordCopy'])
+         {   
+             $_SESSION['error']="You did not confirm your entered password 
+             correctly. Please try entering your password correctly 
+             twice.";
+             header("Location: edit.php");
+             return;
+         }
+
+         
         //update guardian in the guardian table
         updateGuardianRow($pdo, $_SESSION['guardianID']);
         
 
         //update student in the student table
-        updateStudentRow($pdo, $_SESSION['studentID'], 
-        $_SESSION['guardianID']);
+        updateStudentRow($pdo, $_SESSION['studentID']/*, 
+        $_SESSION['guardianID']*/);
 
 
         /*Write a success message and send the signed up student 
@@ -62,8 +108,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../../style.css">
         <title>Student Profile Edit</title>
         <style>
 
@@ -75,85 +120,184 @@
         <form method="post">
 
             <!--Student Information-->
-            <label for="studentName">Name: </label>
-            <input type="text" name="studentName" id="studentName" required>
-            <br>
+        <label for="studentName">Name: </label>
+        <input type="text" name="studentName" id="studentName"
+        <?php if(isset($_SESSION['studentName'])) { 
+            echo 'value="' . $_SESSION['studentName'] . '"'; 
+            } ?> required><br>
 
-            <label for="studentSurname">Surname: </label>
-            <input type="text" name="studentSurname" id="studentSurname" 
-            required><br>
+        <label for="studentSurname">Surname: </label>
+        <input type="text" name="studentSurname" id="studentSurname"
+        <?php if(isset($_SESSION['studentSurname'])) { 
+        echo 'value="' . $_SESSION['studentSurname'] . '"'; 
+        } ?> required><br>
 
-            <label for="studentPhoneNumber">Phone Number: </label>
-            <input type="text" name="studentPhoneNumber" 
-            id="studentPhoneNumber" required><br>
-            
+        <label for="studentEmail">Email: </label>
+        <input type="email" name="studentEmail" id="studentEmail"
+        <?php if(isset($_SESSION['studentEmail'])) { 
+        echo 'value="' . $_SESSION['studentEmail'] . '"'; 
+        } ?> required><br>
 
-            <label for="studentGender">Gender: </label>
-            <select name="studentGender" id="studentGender" required>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-            </select><br>
-
-            <label for="studentAge">Age: </label>
-            <input type="number" name="studentAge" id="studentAge" 
-            required><br>
-
-            <label for="education">Current Education level: </label>
-            <select name="education" id="education" required>
-                <option value="High School">
-                    I am a high school student.</option>
-                <option value="Bachelor">
-                    I am a bachelor student.</option>
-                <option value="Master">I am a master student.</option>
-                <option value="PHD">I am a phd student</option>
-            </select><br>
-
-            <label for="studentAddress">
-                Please write your address below:</label><br>
-            <textarea name="studentAddress" id="studentAddress" 
-            cols="30" rows="10" required></textarea><br>
+        <label for="studentPhoneNumber">Phone Number: </label>
+        <input type="text" name="studentPhoneNumber" id="studentPhoneNumber"
+        <?php if(isset($_SESSION['studentPhoneNumber'])) { 
+        echo 'value="' . $_SESSION['studentPhoneNumber'] . '"'; 
+        } ?> required><br>
 
 
-            <!-- Guardian Information-->
-            <p>We need a person (like your father for example) that
-                 you can enter as your guardian.</p>
+        <label for="studentGender">Gender: </label>
+        <select name="studentGender" id="studentGender" required>
 
-            <label for="guardianName">Name: </label>
-            <input type="text" name="guardianName" id="guardianName" 
-            required><br>
+        <option value="Male" <?php if(isset($_SESSION['studentGender']) 
+        && $_SESSION['studentGender'] == 'Male') { echo 'selected'; } ?>
+        >Male</option>
 
-            <label for="guardianSurname">Surname: </label>
-            <input type="text" name="guardianSurname" 
-            id="guardianSurname" required><br>
+        <option value="Female" <?php if(isset($_SESSION['studentGender']) 
+        && $_SESSION['studentGender'] == 'Female') { echo 'selected'; } ?>
+        >Female</option>
 
-            <label for="guardianAge">Age: </label>
-            <input type="number" name="guardianAge" id="guardianAge" 
-            required><br>
+        <option value="Other" <?php if(isset($_SESSION['studentGender']) 
+        && $_SESSION['studentGender'] == 'Other') { echo 'selected'; } ?>
+        >Other</option>
+        </select><br>
 
-            <label for="guardianPhoneNumber">Phone Number: </label>
-            <input type="text" name="guardianPhoneNumber" 
-            id="guardianPhoneNumber" required><br>
 
-            <label for="guardianEmail">Email: </label>
-            <input type="email" name="guardianEmail" id="guardianEmail" 
-            required><br>
+        <label for="studentAge">Age: </label>
+        <input type="number" name="studentAge" id="studentAge"
+        <?php if(isset($_SESSION['studentAge'])) { 
+        echo 'value="' . $_SESSION['studentAge'] . '"'; 
+        } ?> required><br>
 
-            <p>What is your relationship with this person?</p>
-            <label for="guardianRelation">This person is my: </label>
-            <select name="guardianRelation" id="guardianRelation" 
-            required>
-                <option value="Brother">Brother</option>
-                <option value="Sister">Sister</option>
-                <option value="Mother">Mother</option>
-                <option value="Father">Father</option>
-                <option value="Other Relationship">Other Relationship
-                </option>    
-            </select><br>
+
+        <label for="education">Current Education level: </label>
+        <select name="education" id="education" required>
+        
+        <option value="High School" <?php if(isset($_SESSION['education']) 
+        && $_SESSION['education'] == 'High School') { echo 'selected'; } ?>
+        >I am a high school student.</option>
+        
+        <option value="Bachelor" <?php if(isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'Bachelor') { echo 'selected'; } ?>
+        >I am a bachelor student.</option>
+        
+        <option value="Master" <?php if(isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'Master') { echo 'selected'; } ?>
+        >I am a master student.</option>
+        
+        <option value="PHD" <?php if(isset($_SESSION['education']) && 
+        $_SESSION['education'] == 'PHD') { echo 'selected'; } ?>
+        >I am a phd student</option>
+        </select><br>
+
+
+        <label for="studentAddress">Please write your address below:</label><br>
+
+        <textarea name="studentAddress" id="studentAddress" cols="30" 
+        rows="10" required>
+        <?php if(isset($_SESSION['studentAddress'])) { 
+        echo $_SESSION['studentAddress']; 
+        } ?>
+        </textarea><br>
+
+        <p>Please enter a password that contains at least 8 characters 
+        and a combination of letters and numbers:</p>
+
+        <label for="studentPassword">Password: </label>
+        <input type="password" name="studentPassword" id="studentPassword" 
+        required
+
+        <?php if(isset($_SESSION['studentPassword'])) { 
+        echo 'value="' . $_SESSION['studentPassword'] . '"'; 
+        } ?>><br>
+
+        <p>Please Confirm Your Password:</p>
+
+        <label for="studentPasswordCopy">Password: </label>
+        <input type="password" name="studentPasswordCopy" 
+        id="studentPasswordCopy" required
+        <?php if(isset($_SESSION['studentPasswordCopy'])) { 
+        echo 'value="' . $_SESSION['studentPasswordCopy'] . '"'; 
+        } ?>><br>
+
+
+        <!-- Guardian Information-->
+        <p>We need a person (like your father for example) that you can 
+        enter as your guardian.</p>
+        <label for="guardianName">Name: </label>
+        <input type="text" name="guardianName" id="guardianName" required
+
+        <?php if(isset($_SESSION['guardianName'])) { 
+        echo 'value="' . $_SESSION['guardianName'] . '"'; 
+        } ?>><br>
+
+        <label for="guardianSurname">Surname: </label>
+        <input type="text" name="guardianSurname" id="guardianSurname" 
+        required
+
+        <?php if(isset($_SESSION['guardianSurname'])) { 
+        echo 'value="' . $_SESSION['guardianSurname'] . '"'; 
+        } ?>><br>
+
+        <label for="guardianAge">Age: </label>
+        <input type="number" name="guardianAge" id="guardianAge" required
+
+        <?php if(isset($_SESSION['guardianAge'])) { 
+        echo 'value="' . $_SESSION['guardianAge'] . '"'; 
+        } ?>><br>
+
+        <label for="guardianPhoneNumber">Phone Number: </label>
+        <input type="text" name="guardianPhoneNumber" 
+        id="guardianPhoneNumber" required
+
+        <?php if(isset($_SESSION['guardianPhoneNumber'])) { 
+        echo 'value="' . $_SESSION['guardianPhoneNumber'] . '"'; 
+        } ?>><br>
+
+        <label for="guardianEmail">Email: </label>
+        <input type="email" name="guardianEmail" id="guardianEmail" 
+        required
+
+        <?php if(isset($_SESSION['guardianEmail'])) { 
+        echo 'value="' . $_SESSION['guardianEmail'] . '"'; 
+        } ?>><br>
+
+
+        <p>What is your relationship with this person?</p>
+        <label for="guardianRelation">This person is my: </label>
+        <select name="guardianRelation" id="guardianRelation" required>
+
+        <option value="Brother" 
+        <?php if(isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Brother') { echo 'selected'; } ?>
+        >Brother</option>
+        
+        <option value="Sister" 
+        <?php if(isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Sister') { echo 'selected'; } ?>
+        >Sister</option>
+        
+        <option value="Mother" 
+        <?php if(isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Mother') { echo 'selected'; } ?>
+        >Mother</option>
+        
+        <option value="Father" 
+        <?php if(isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Father') { echo 'selected'; } ?>
+        >Father</option>
+        
+        <option value="Other Relationship" 
+        <?php if(isset($_SESSION['guardianRelation']) && 
+        $_SESSION['guardianRelation'] == 'Other Relationship') 
+        { echo 'selected'; } ?>>Other Relationship</option>
+        </select><br>
+
 
             <input type="submit" name="submit" value="Update Profile">
         </form>
 
+        <a href="../../prices.php">Room Prices</a>
         <a href="view.php">Cancel</a>
+        <a href="../../logout.php">Log Out</a>
     </body>
 </html>

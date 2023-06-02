@@ -18,7 +18,7 @@
     {
         $_SESSION['error']="Please log in or sign up first in order 
         to continue.";
-        header("Location: C:/xampp\htdocs\hostel\home.php");
+        header("Location: ../../home.php");
         return;
     }
     
@@ -32,8 +32,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../../style.css">
         <title>Student Rooms</title>
         <style>
 
@@ -90,7 +89,7 @@
                         </td><td>';
                         echo '<a href="delete.php?studentID='.$studentID
                         .'&roomNumber='.$roomNumber.'">Delete</a>
-                        </td><td>';
+                        </td></tr>';
                     }
                 }
             ?>
@@ -101,6 +100,8 @@
         <p></p>
         <a href="add.php">Book a room</a>
 
+        <a href="../../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>
+        <a href="../../logout.php">Log Out</a>
     </body>
 </html>

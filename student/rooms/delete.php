@@ -17,7 +17,7 @@
     {
         $_SESSION['error']="Please log in or sign up first in order 
         to continue.";
-        header("Location: C:/xampp\htdocs\hostel\home.php");
+        header("Location: ../../home.php");
         return;
     }
 
@@ -27,6 +27,9 @@
     {
         //delete the row from the booking table
         deleteBookingRow($pdo);
+
+        //decrease the number of students in the room by 1
+        decrementNumberOfStudents($pdo);
 
         $_SESSION['success']="Your booking was successfully cancelled!";
         
@@ -64,8 +67,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../../style.css">
         <title>Reservation Cancelling</title>
         <style>
 
@@ -90,6 +92,8 @@
             <input type="submit" name="submit" value="Cancel Reservation">
         </form>
 
+        <a href="../../prices.php">Room Prices</a>
         <a href="view.php">Go Back</a>
+        <a href="../../logout.php">Log Out</a>
     </body>
 </html>

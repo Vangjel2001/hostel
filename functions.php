@@ -1,6 +1,8 @@
 <?php 
     require_once "pdo.php";
 
+
+    //FLASH MESSAGES FUNCTIONS
     function displaySuccessMessage()
     {
         //if there is a success message stored in the superglobal
@@ -24,6 +26,18 @@
             unset($_SESSION['error']);
         }        
     }
+
+
+
+
+
+
+
+
+
+
+    //STUDENT TABLE FUNCTIONS
+
 
     //check if the student name is in the database
     function studentNameFound($studentName, $pdo)
@@ -99,44 +113,6 @@
         return $row['studentPassword'];
     }
 
-    /*prepare to fill form input fields with empty values if the form 
-    has not been submitted yet*/
-    function initializeStudentInput()
-    {
-        $student['studentName']="";
-        $student['studentSurname']="";
-        $student['studentEmail']="";
-        $student['studentPhoneNumber']="";
-        $student['studentGender']="";
-        $student['guardianRelation']="";
-        $student['studentAge']="";
-        $student['education']="";
-        $student['studentAddress']="";
-        $student['studentPassword']="";
-
-        return $student;
-    }
-
-    //prepare to fill form fields with the submitted values
-    function returnStudentInput()
-    {
-        $student['studentName']=htmlentities($_POST['studentName']);
-        $student['studentSurname']=htmlentities($_POST['studentSurname']);
-        $student['studentEmail']=htmlentities($_POST['studentEmail']);
-        $student['studentPhoneNumber']=
-        htmlentities($_POST['studentPhoneNumber']);
-        $student['studentGender']=htmlentities($_POST['studentGender']);
-        $student['guardianRelation']=
-        htmlentities($_POST['guardianRelation']);
-        $student['studentAge']=htmlentities($_POST['studentAge']);
-        $student['education']=htmlentities($_POST['education']);
-        $student['studentAddress']=htmlentities($_POST['studentAddress']);
-        $student['studentPassword']=
-        htmlentities($_POST['studentPassword']);
-        echo 'Student input returned.'.'<br>';
-
-        return $student;
-    }
 
     //insert student in the student table
     function insertRowIntoStudent($guardianID, $pdo)
@@ -168,7 +144,7 @@
         ));
     }
 
-    function updateStudentRow($pdo, $studentID, $guardianID)
+    function updateStudentRow($pdo, $studentID/*, $guardianID*/)
     {
 
         $sql="UPDATE student 
@@ -177,7 +153,7 @@
         studentPhoneNumber= :studentPhoneNumber, studentGender= 
         :studentGender, guardianRelation= :guardianRelation, 
         studentAge= :studentAge, education= :education, 
-        studentAddress= :studentAddress, guardianID= :guardianID 
+        studentAddress= :studentAddress/*, guardianID= :guardianID*/ 
         WHERE studentID=$studentID;";
 
         $stmt=$pdo->prepare($sql);
@@ -191,7 +167,7 @@
             ":studentAge" => $_POST['studentAge'],
             ":education" => $_POST['education'],
             ":studentAddress" => $_POST['studentAddress'],
-            ":guardianID" => $guardianID
+            /*":guardianID" => $guardianID*/
         ));
     }
 
@@ -209,6 +185,42 @@
         $row=$stmt->fetch(PDO::FETCH_ASSOC);
         return $row;
     }
+
+    function getStudentRow($pdo)
+    {
+        $sql="SELECT * 
+        FROM student 
+        WHERE studentID=:zip;";
+        $stmt=$pdo->prepare($sql);
+        $stmt->bindParam(":zip", $_GET['studentID']);
+        $stmt->execute();
+
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    function returnStudentEmails($pdo)
+    {
+        $sql="SELECT studentEmail 
+        FROM student;";
+        $stmt=$pdo->query($sql);
+
+        return $stmt;
+    }
+
+
+
+
+
+
+
+
+
+    //GUARDIAN TABLE FUNCTIONS
+
+
+
+
 
     /*prepare to fill form input fields with empty values if the form 
     has not been submitted yet*/
@@ -327,6 +339,67 @@
     }
 
     
+
+
+
+
+
+
+
+
+
+
+    //BOOKING AND ROOM FUNCTIONS
+
+    function getAllRoomsInfo($pdo)
+    {
+        $sql="SELECT * 
+        FROM room 
+        ORDER BY roomNumber;";
+        $stmt=$pdo->query($sql);
+
+        return $stmt;
+    }
+
+    function addRoom($pdo)
+    {
+        $roomNumber=$_POST['roomNumber'];
+        $mealFee=$_POST['mealFee'];
+        $regularFee=$_POST['regularFee'];
+        $capacity=$_POST['capacity'];
+
+        $sql="INSERT INTO room (roomNumber, mealFee, regularFee, 
+        capacity, numberOfStudents) 
+        VALUES($roomNumber, $mealFee, $regularFee, $capacity, 0);";
+        $pdo->query($sql);
+    }
+
+    function updateRoom($pdo)
+    {
+        $roomNumber=$_POST['roomNumber'];
+
+        $mealFee=$_POST['mealFee'];
+        $regularFee=$_POST['regularFee'];
+        $capacity=$_POST['capacity'];
+
+        $sql="UPDATE room 
+        SET mealFee=$mealFee, regularFee=$regularFee, capacity=$capacity 
+        WHERE roomNumber=$roomNumber;";
+        $pdo->query($sql);
+
+    }
+
+    function deleteRoom($pdo)
+    {
+        $roomNumber=$_POST['roomNumber'];
+
+        $sql="DELETE 
+        FROM room 
+        WHERE roomNumber=$roomNumber;";
+        $pdo->query($sql);
+    }
+
+
     function getBookingsAndRoomsInfo($studentID, $pdo)
     {
         $sql="SELECT b.roomNumber, b.duration, b.startDate, b.endDate, 
@@ -351,11 +424,31 @@
         return $row;
     }
 
+    function getAllRoomNumbers($pdo)
+    {
+        $sql="SELECT roomNumber 
+        FROM room;";
+        $stmt=$pdo->query($sql);
+
+        return $stmt;
+    }
+
     function getFreeRoomNumbers($pdo)
     {
         $sql="SELECT roomNumber 
         FROM room 
         WHERE numberOfStudents=0;";
+
+        $stmt=$pdo->query($sql);
+
+        return $stmt;
+    }
+
+    function getNotFullRoomNumbers($pdo)
+    {
+        $sql="SELECT roomNumber 
+        FROM room 
+        WHERE numberOfStudents!=capacity;";
 
         $stmt=$pdo->query($sql);
 
@@ -425,7 +518,8 @@
         $studentID=$_GET['studentID'];
         $roomNumber=$_GET['roomNumber'];
 
-        if($studentID!=$_SESSION['studentID'])
+        if(!isset($_SESSION['adminName']) && 
+        $studentID!=$_SESSION['studentID'])
         {
             $_SESSION['error']="Please do not try to access reservations 
             done by other students.";
@@ -469,6 +563,142 @@
         
         return $row;
     }
+
+
+    function incrementNumberOfStudents($pdo)
+    {
+        $roomNumber=$_POST['roomNumber'];
+
+        $sql="SELECT capacity, numberOfStudents 
+        FROM room 
+        WHERE roomNumber=$roomNumber;";
+        $stmt=$pdo->query($sql);
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+        $capacity=(int)$row['capacity'];
+        $numberOfStudents=(int)$row['numberOfStudents'];
+
+        if($numberOfStudents>=$capacity)
+        {
+            $_SESSION['error']="The room is full.";
+            return false;
+        }
+
+        $newNumberOfStudents=$numberOfStudents+1;
+
+        $sql="UPDATE room 
+        SET numberOfStudents=$newNumberOfStudents 
+        WHERE roomNumber=$roomNumber;";
+
+        $pdo->query($sql);
+    }
+
+
+    function decrementNumberOfStudents($pdo)
+    {
+        $roomNumber=$_POST['roomNumber'];
+
+        $sql="SELECT capacity, numberOfStudents 
+        FROM room 
+        WHERE roomNumber=$roomNumber;";
+        $stmt=$pdo->query($sql);
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+
+        $capacity=(int)$row['capacity'];
+        $numberOfStudents=(int)$row['numberOfStudents'];
+
+        if($numberOfStudents==0)
+        {
+            $_SESSION['error']="The room is empty.";
+            return false;
+        }
+
+        $newNumberOfStudents=$numberOfStudents-1;
+
+        $sql="UPDATE room 
+        SET numberOfStudents=$newNumberOfStudents 
+        WHERE roomNumber=$roomNumber;";
+
+        $pdo->query($sql);
+    }
+
+
+
+
+
+
+
+
+    //ADMIN TABLE FUNCTIONS
+
+
+
+    function adminNameFound($pdo)
+    {
+        $sql="SELECT * 
+        FROM administrator 
+        WHERE adminName=:zip;";
+
+        $stmt=$pdo->prepare($sql);
+        $stmt->bindParam(':zip', $_POST['adminName']);
+        $stmt->execute();
+
+        if($stmt->rowCount()>0)
+        return true;
+        else
+        return false;
+    }
+
+    function adminPasswordFound($pdo)
+    {
+        $sql="SELECT * 
+        FROM administrator 
+        WHERE adminPassword=:zip;";
+
+        $stmt=$pdo->prepare($sql);
+        $stmt->bindParam(':zip', $_POST['adminPassword']);
+        $stmt->execute();
+
+        if($stmt->rowCount()>0)
+        return true;
+        else
+        return false;
+    }
+
+    function getAdministratorRow($pdo)
+    {
+        $adminName=$_SESSION['adminName'];
+
+        $sql="SELECT * 
+        FROM administrator 
+        WHERE adminName=:zip;";
+
+        $stmt=$pdo->prepare($sql);
+        $stmt->bindParam(':zip', $adminName);
+        $stmt->execute();
+        $row=$stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $row;
+    }
+
+    function updateAdministratorRow($pdo, $oldAdminName)
+    {
+        $sql="UPDATE administrator 
+        SET adminName=:adminName, adminPassword=:adminPassword, 
+        adminEmail=:adminEmail, adminPhoneNumber=:adminPhoneNumber 
+        WHERE adminName=:oldAdminName;";
+
+        $stmt=$pdo->prepare($sql);
+        $stmt->execute(array(
+            ":adminName" => $_POST['adminName'],
+            ":adminPassword" => $_POST['adminPassword'],
+            ":adminEmail" => $_POST['adminEmail'],
+            ":adminPhoneNumber" => $_POST['adminPhoneNumber'],
+            ":oldAdminName" => $oldAdminName
+        ));
+    }
+
+
 
 
 

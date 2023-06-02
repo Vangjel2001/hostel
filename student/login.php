@@ -85,8 +85,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../style.css">
         <title>Student Log In</title>
         <style>
 
@@ -110,6 +109,7 @@
             <input type="submit" name="submit" value="Log In">
         </form>
 
+        <a href="../prices.php">Room Prices</a>
         <a href="../home.php">Cancel</a>
 
     </body>

@@ -18,7 +18,7 @@
     {
         $_SESSION['error']="Please log in or sign up first in order 
         to continue.";
-        header("Location: C:/xampp\htdocs\hostel\home.php");
+        header("Location: ../../home.php");
         return;
     }
 
@@ -36,8 +36,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../../style.css">
         <title>Student Profile View</title>
         <style>
 
@@ -68,6 +67,8 @@
         <a href="editPassword.php?studentID=<?=$studentID?>">
         Change Password</a>
 
+        <a href="../../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>
+        <a href="../../logout.php">Log Out</a>
     </body>
 </html>

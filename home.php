@@ -1,16 +1,33 @@
+<?php 
+
+    /*require the script from the database connection file
+    and the file containing user-defined functions*/
+    require_once "pdo.php";
+    require_once "functions.php";
+
+    //start the session
+    session_start();
+
+    /*display flash messages if things have gone right or wrong
+    during the use of the application*/
+    displayErrorMessage();
+    displaySuccessMessage();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
         <title>Home Page</title>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+        <link rel="stylesheet" href="style.css">
         <style>
 
         </style>
     </head>
     <body>
         <!--Navigation Bar for the web application-->
-        <nav>  
+        <nav class="navbar">  
             <ul>
 
             <li><a href="home.php"> Home </a></li>
@@ -20,7 +37,8 @@
             <li><a href="student/login.php"> Log In </a></li>
             <li><a href="admin/login.php"> Administrator Log In</a></li>   
             <li><a href="contact.php"> Contact </a></li>  
-            <li><a href="useTerms.php"> Terms of use </a></li>  
+            <li><a href="useTerms.php"> Terms of use </a></li>
+            <li><a href="prices.php"> Room Prices </a></li>  
              
             </ul>  
         </nav>
@@ -40,6 +58,9 @@
             "Terms of use"</p>
         <p>If you are the administrator, click "Administrator Log In"</p>
         <p>If you want to go to the home page, click "Home"</p>
+        <p>If you want to check out the affordable prices we 
+            offer, click "Room Prices".
+        </p>
 
     </body>
 </html>

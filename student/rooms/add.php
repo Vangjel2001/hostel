@@ -18,7 +18,7 @@
     {
         $_SESSION['error']="Please log in or sign up first in order 
         to continue.";
-        header("Location: C:/xampp\htdocs\hostel\home.php");
+        header("Location: ../../home.php");
         return;
     }
 
@@ -72,6 +72,9 @@
             ":foodStatus" => $_POST['foodStatus']
         ));
 
+        //increase the number of students in the room by 1
+        incrementNumberOfStudents($pdo);
+
         //Send a message notifying that the booking was made
         $_SESSION['success']="The room was booked successfully!";
         
@@ -87,8 +90,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../../style.css">
         <title>Student Room Booking</title>
         <style>
 
@@ -154,6 +156,8 @@
             <input type="submit" name="submit" value="Finish Reservation">
         </form>
 
+        <a href="../../prices.php">Room Prices</a>
         <a href="view.php">Cancel</a>
+        <a href="../../logout.php">Log Out</a>
     </body>
 </html>

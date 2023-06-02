@@ -28,8 +28,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" 
-        href="file:///C:/xampp/htdocs/hostel/style.css">
+    <link rel="stylesheet" href="../style.css">
         <title>Student Home Page</title>
         <style>
 
@@ -39,7 +38,7 @@
     <body>
         <h1>Student Home Page</h1>
 
-        <nav>  
+        <nav class="navbar">  
             <ul>
 
                 <li>
@@ -53,6 +52,8 @@
             </ul>  
         </nav>
 
+        <a href="../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>
+        <a href="../logout.php">Log Out</a>
     </body>
 </html>
