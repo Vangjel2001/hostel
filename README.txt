@@ -1,4 +1,90 @@
-Software Engineering Project Description
+How To Run The Application:
+
+To run the project locally using XAMPP, MySQL, and phpMyAdmin, you can follow these general steps:
+
+1. Install XAMPP: Download and install XAMPP, which includes Apache web server, MySQL database server, and PHP.
+
+2. Start Apache and MySQL: Launch the XAMPP control panel and start the Apache web server and MySQL database server.
+
+3. Import the Database: Open phpMyAdmin by visiting http://localhost/phpmyadmin in your web browser. Create a new database for your project and run the sql code needed to create the tables.
+
+Here is the SQL code needed to create the tables:
+
+CREATE TABLE Room
+(
+  roomNumber INT NOT NULL,
+  mealFee FLOAT NOT NULL,
+  regularFee FLOAT NOT NULL,
+  capacity INT NOT NULL,
+  numberOfStudents INT NOT NULL,
+  PRIMARY KEY (roomNumber)
+);
+
+CREATE TABLE Guardian
+(
+  guardianName VARCHAR(50) NOT NULL,
+  GuardianID INT NOT NULL AUTO_INCREMENT,
+  guardianSurname VARCHAR(50) NOT NULL,
+  guardianPhoneNumber CHAR(10) NOT NULL,
+  guardianEmail VARCHAR(50) NOT NULL,
+  guardianAge INT NOT NULL,
+  PRIMARY KEY (GuardianID)
+);
+
+CREATE TABLE Administrator
+(
+  adminName VARCHAR(30) NOT NULL,
+  adminPassword VARCHAR(100) NOT NULL,
+  adminEmail VARCHAR(50) NOT NULL,
+  adminPhoneNumber VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE Student
+(
+  studentID INT NOT NULL AUTO_INCREMENT,
+  studentName VARCHAR(50) NOT NULL,
+  studentSurname VARCHAR(50) NOT NULL,
+  studentEmail VARCHAR(50) NOT NULL,
+  studentPhoneNumber CHAR(10) NOT NULL,
+  studentGender VARCHAR(50) NOT NULL,
+  guardianRelation VARCHAR(50) NOT NULL,
+  studentAge INT NOT NULL,
+  education VARCHAR(50) NOT NULL,
+  studentAddress VARCHAR(1000) NOT NULL,
+  studentPassword VARCHAR(100) NOT NULL,
+  GuardianID INT NOT NULL,
+  PRIMARY KEY (studentID),
+  FOREIGN KEY (GuardianID) REFERENCES Guardian(GuardianID)
+);
+
+CREATE TABLE booking
+(
+  duration INT NOT NULL,
+  startDate DATE NOT NULL,
+  endDate DATE NOT NULL,
+  totalFee FLOAT NOT NULL,
+  foodStatus VARCHAR(30) NOT NULL,
+  studentID INT NOT NULL,
+  roomNumber INT NOT NULL,
+  PRIMARY KEY (studentID, roomNumber),
+  FOREIGN KEY (studentID) REFERENCES Student(studentID),
+  FOREIGN KEY (roomNumber) REFERENCES Room(roomNumber)
+);
+
+
+4. Project Setup: Place your project files inside the appropriate folder in the XAMPP htdocs directory. For example, if your project is named "hostel", you can create a folder htdocs/hostel and place your project files there.
+
+5. Configure Database Connection: Locate the file in your project that establishes a connection to the MySQL database (e.g., pdo.php or config.php). Update the database connection details such as hostname, username, password, and database name to match your local setup.
+
+6. Access the Project: Open your web browser and visit http://localhost/hostel (replace "hostel" with the folder name where you placed your project files). This will load the project homepage.
+
+By following these steps, you should be able to run the project locally on your machine using XAMPP, MySQL, and phpMyAdmin.
+
+
+
+
+
+Project Description
 
 Worked By: Vangjel Dhima, BINF 3 B
 Project Topic: Engineering a Student Hostel Management System Application
