@@ -44,7 +44,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Students And Student Advocates</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Below is the information for each student and advocate:</h3>
 
         <table border="1">
@@ -104,5 +106,6 @@
         <a href="add.php">Add a student and advocate</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

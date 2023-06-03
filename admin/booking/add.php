@@ -1,5 +1,5 @@
 <?php 
-
+   
     /*require the script from the database connection file
     and the file containing user-defined functions*/
     require_once "C:/xampp\htdocs\hostel\pdo.php";
@@ -127,7 +127,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Make A Reservation</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <form method="post" action="">
             <label for="studentEmail">Student Email: </label>
             <select name="studentEmail" id="studentEmail" required>
@@ -224,6 +226,7 @@
 
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 
 

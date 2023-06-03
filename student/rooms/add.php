@@ -102,7 +102,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Student Room Booking</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Please fill in all the fields in the form below to complete 
             your room reservation:</h3>
         
@@ -188,7 +190,7 @@
         <option value="No food" <?= (isset($_SESSION['foodStatus']) 
         && $_SESSION['foodStatus'] == 'No food') ? 'selected' : '' ?>
         >I do not want any meals</option>
-        
+
         </select><br>
 
         <input type="submit" name="submit" value="Finish Reservation">
@@ -198,5 +200,6 @@
         <a href="../../prices.php">Room Prices</a>
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

@@ -6,7 +6,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>About Us</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <p></p>
 
         <h3>Welcome to our Student Hostel!</h3>
@@ -58,11 +60,12 @@
         amenities and services designed to make your stay comfortable 
         and convenient. Our friendly staff is always available to assist 
         you with any queries or concerns you may have.</p>
-        <p>Come join our vibrant community and experience a supportive and 
-        enriching student life. We look forward to welcoming you to our 
-        hostel and being part of your academic journey!</p>
-        <p></p>
+        <p style="margin-bottom: 30px;">Come join our vibrant community 
+        and experience a supportive and enriching student life. 
+        We look forward to welcoming you to our hostel and being part of 
+        your academic journey!</p>
 
         <a href="#" onclick="history.go(-1); return false;">Go Back</a>
+        </div>
     </body>
 </html>

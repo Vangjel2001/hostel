@@ -28,7 +28,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Contact Us</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
 
         <p>Below are the phone number and email adress of the 
             hostel administrator:
@@ -36,9 +38,9 @@
         <p></p>
 
         <p>Phone Number: <?=$adminPhoneNumber?></p>
-        <p>Email: <?=$adminEmail?></p>
-        <p></p>
+        <p style="margin-bottom: 30px;">Email: <?=$adminEmail?></p>
         <a href="#" onclick="history.go(-1); return false;">Go Back</a>
+        </div>
     </body>
 
 </html>

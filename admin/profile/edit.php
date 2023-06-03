@@ -70,7 +70,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Administrator Log In Information Update</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Enter the new log in credentials below:</h3>
 
         <form method="post" action="">
@@ -111,6 +113,6 @@
 
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
-        
+        </div>
     </body>
 </html>

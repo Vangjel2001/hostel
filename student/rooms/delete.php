@@ -75,7 +75,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Cancelling Room Reservation</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Are you sure you want to cancel your reservation of the 
             following room?</h3>
 
@@ -95,5 +97,6 @@
         <a href="../../prices.php">Room Prices</a>
         <a href="view.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

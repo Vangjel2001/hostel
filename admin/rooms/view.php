@@ -38,7 +38,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Rooms</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <table border="1">
             <tr>
                 <th>Room Number</th>
@@ -87,6 +89,6 @@
         <a href="add.php">Add A Room</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
-
+        </div>
     </body>
 </html>

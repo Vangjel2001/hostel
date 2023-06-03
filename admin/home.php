@@ -34,7 +34,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Administrator Home Page</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
 
         <nav class="navbar">  
             <ul>
@@ -60,5 +62,6 @@
 
         <a href="../home.php">Go Back</a>
         <a href="../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

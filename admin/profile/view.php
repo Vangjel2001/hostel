@@ -38,16 +38,18 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Below is the administrator profile information:</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
 
         <p>Administrator Name: <?=htmlentities($row['adminName'])?></p>
         <p>Administrator Email: <?=htmlentities($row['adminEmail'])?></p>
-        <p>Administrator Phone Number: 
+        <p style="margin-bottom: 30px;">Administrator Phone Number: 
         <?=htmlentities($row['adminPhoneNumber'])?></p>
 
-        <a href="edit.php">Edit profile information</a>
+        <a href="edit.php">Edit Profile Information</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
-        
+        </div>
     </body>
 </html>

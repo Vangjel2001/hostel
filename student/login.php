@@ -93,7 +93,9 @@
     </head>
         
     <body>
+        <div class="container">
         <h1>Student Log In</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Please provide the following information:</h3>
 
         <form method="post" action="">
@@ -111,6 +113,6 @@
 
         <a href="../prices.php">Room Prices</a>
         <a href="../home.php">Cancel</a>
-
+        </div>
     </body>
 </html>

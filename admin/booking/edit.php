@@ -120,7 +120,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Edit Reservation</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <form method="post" action="">
 
             <label for="startDate">Reservation Start Date: </label>
@@ -230,6 +232,7 @@
 
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 
 

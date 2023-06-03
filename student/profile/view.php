@@ -44,7 +44,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Student Profile</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
 
         <p>Name: <?php echo $row['studentName'] ?></p>
         <p>Surname: <?php echo $row['studentSurname'] ?></p>
@@ -61,7 +63,8 @@
         <p>Advocate Age: <?php echo $row['guardianAge'] ?></p>
         <p>Advocate Phone Number: 
             <?php echo $row['guardianPhoneNumber'] ?></p>
-        <p>Advocate Email Address: <?php echo $row['guardianEmail'] ?></p>
+        <p style="margin-bottom: 30px;">Advocate Email Address: 
+        <?php echo $row['guardianEmail'] ?></p>
 
         <a href="edit.php">Edit Profile</a>
         <a href="editPassword.php">Change Password</a>
@@ -69,5 +72,6 @@
         <a href="../../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

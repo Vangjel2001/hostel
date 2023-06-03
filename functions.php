@@ -9,7 +9,8 @@
         //array $_SESSION, print it on the browser with green color 
         //writing
         if( isset($_SESSION['success']) ) {
-            echo'<p style="color:green">'.$_SESSION['success']."</p>\n";
+            echo'<p class="success" 
+            style="color:green">'.$_SESSION['success']."</p>\n";
             //delete the array key success from $_SESSION
             unset($_SESSION['success']);
         }        
@@ -21,7 +22,8 @@
         //array $_SESSION, print it on the browser with red color 
         //writing
         if( isset($_SESSION['error']) ) {
-            echo'<p style="color:red">'.$_SESSION['error']."</p>\n";
+            echo'<p class="error" 
+            style="color:red">'.$_SESSION['error']."</p>\n";
             //delete the array key error from $_SESSION
             unset($_SESSION['error']);
         }        

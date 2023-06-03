@@ -40,7 +40,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Student Rooms</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Below is your room information:</h3>
 
         <h4>Rooms:</h4>
@@ -103,5 +105,6 @@
         <a href="../../prices.php">Room Prices</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

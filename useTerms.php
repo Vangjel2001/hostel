@@ -6,7 +6,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Use Terms</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <p></p>
 
         <h3>Reservations And Payments</h3>
@@ -16,8 +18,8 @@
             reservation anytime you want. If you want to book a 
             room that has inhabitants in it, please contact the 
             hostel administrator in our 
-            <a href="contact.php">Contact Page</a>. You can make the 
-            payment in cash when you arrive at the hostel. 
+            <a style="margin: 0px;" href="contact.php">Contact Page</a>. 
+            You can make the payment in cash when you arrive at the hostel. 
         </p>
 
         <h3>Recreational Facilities</h3>
@@ -69,11 +71,11 @@
         clarification, please do not hesitate to contact our friendly 
         staff, who are always ready to assist you.</p>
         
-        <p>Thank you for choosing our hostel, and we look forward to your 
-        cooperation in preserving our facilities for the benefit of all 
-        residents.</p>
-        <p></p>
+        <p style="margin-bottom: 30px;">Thank you for choosing our hostel, 
+        and we look forward to your cooperation in preserving our 
+        facilities for the benefit of all residents.</p>
 
         <a href="#" onclick="history.go(-1); return false;">Go Back</a>
+        </div>
     </body>
 </html>

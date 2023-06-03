@@ -22,7 +22,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Reservation Prices</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
 
         <p>Each room has a daily stay fee that you have to pay each 
             day even if you do not want any meals served by our hostel 
@@ -57,5 +59,6 @@
 
         <a href="#" onclick="history.go(-1); return false;">Go Back</a>
         <a href="logout.php">Log Out</a>
+        </div>
     </body>
 </html>

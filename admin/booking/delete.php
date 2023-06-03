@@ -82,7 +82,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Cancel Booking</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Are you sure you want to cancel this booking?</h3>
 
         <p>Student ID: <?=$row['studentID']?></p>
@@ -107,5 +109,6 @@
 
         <a href="view.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

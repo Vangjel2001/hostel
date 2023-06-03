@@ -112,7 +112,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Deleting Student</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Are you sure you want to delete the student with the 
             following information?</h3>
         
@@ -129,5 +131,6 @@
 
         <a href="view.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

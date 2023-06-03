@@ -66,7 +66,11 @@
 
         </style>
     </head>
+
+    <body> 
+        <div class="container">
         <h1>Administrator Log In</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Please provide the following information:</h3>
 
         <form method="post" action="">
@@ -82,7 +86,8 @@
         </form>
 
         <a href="../home.php">Go Back</a>
-    <body>
-        
+        </div>
     </body>
+        
+    
 </html>

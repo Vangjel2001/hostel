@@ -153,7 +153,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Student Sign Up</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Please fill in all the fields in the form below to complete 
             your registration:</h3>
         <form method="post" 
@@ -337,5 +339,6 @@
 
         <a href="../prices.php">Room Prices</a>
         <a href="../home.php">Cancel</a>
+        </div>
     </body>
 </html>

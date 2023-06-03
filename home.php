@@ -26,10 +26,14 @@
         </style>
     </head>
     <body>
+        <div class="container">
+        <h3>Welcome to our Student Hostel!</h3>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <!--Navigation Bar for the web application-->
         <nav class="navbar">  
             <ul>
 
+            <li><a href="prices.php"> Room Prices </a></li> 
             <li><a href="home.php"> Home </a></li>
             <li><a href="about.php"> About Us</a></li>    
             <li><a href="student/signup.php"> Sign Up 
@@ -37,22 +41,20 @@
             <li><a href="student/login.php"> Log In </a></li>
             <li><a href="admin/login.php"> Administrator Log In</a></li>   
             <li><a href="contact.php"> Contact </a></li>  
-            <li><a href="useTerms.php"> Terms of use </a></li>
-            <li><a href="prices.php"> Room Prices </a></li>  
+            <li><a href="useTerms.php"> Terms of use </a></li> 
              
             </ul>  
         </nav>
-        
+
         <!--A bit of advertising-->
-        <h3>Welcome to our Student Hostel!</h3>
+        
         <p>Experience comfortable and affordable accommodation 
         options.</p>
         <p>Enjoy delicious meals and impeccable cleaning service.</p>
         <p>Explore recreational facilities for relaxation and 
         leisure.</p>
-        <p>Join our vibrant community and create unforgettable 
-        memories.</p>
-        <p></p>
+        <p style="margin-bottom: 30px;">Join our vibrant community and 
+        create unforgettable memories.</p>
 
         <!--Explanation on how to navigate the website-->
         <h3>How to navigate this application</h3>
@@ -65,10 +67,10 @@
         <p>If you want to learn more about us, click "About".</p>
         <p>If you want to contact us, click "Contact".</p>
         <p>If you want to learn about our terms of use, click 
-            "Terms of use"</p>
-        <p>If you are the administrator, click "Administrator Log In"</p>
-        <p>If you want to go to the home page, click "Home"</p>
-        
+            "Terms of use".</p>
+        <p>If you are the administrator, click "Administrator Log In".</p>
+        <p>If you want to go to the home page, click "Home".</p>
+        </div>
 
     </body>
 </html>

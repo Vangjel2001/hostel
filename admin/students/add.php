@@ -145,7 +145,9 @@
     </head>
 
     <body>
+        <div class="container"></div>
         <h1>Add A Student</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <h3>Please fill in all the fields in the form below to add 
         the student:</h3>
         
@@ -331,5 +333,6 @@
         </form>
 
         <a href="view.php">Cancel</a>
+        </div>
     </body>
 </html>

@@ -133,7 +133,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Student Profile</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <form method="post">
 
             <!--Student Information-->
@@ -370,5 +372,6 @@
 
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

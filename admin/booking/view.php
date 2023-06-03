@@ -45,7 +45,9 @@
     </head>
 
     <body>
+        <div class="container">
         <h1>Bookings</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <table border="1">
             <tr>
                 <th>Student ID</th>
@@ -100,5 +102,6 @@
         <a href="add.php">Add A Reservation</a>
         <a href="../home.php">Go Back</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>

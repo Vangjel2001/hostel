@@ -60,7 +60,9 @@
     </head>
 
     <body>
+        <div class="container"></div>
         <h1>Edit Room</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Hostel_Dormitory.jpg">
         <form method="post" action="">
 
             <label for="mealFee">Meal Fee: </label>
@@ -116,5 +118,6 @@
 
         <a href="view.php">Cancel</a>
         <a href="../../logout.php">Log Out</a>
+        </div>
     </body>
 </html>
