@@ -6,7 +6,7 @@ To run the project locally using XAMPP, MySQL, and phpMyAdmin, you can follow th
 
 2. Start Apache and MySQL: Launch the XAMPP control panel and start the Apache web server and MySQL database server.
 
-3. Import the Database: Open phpMyAdmin by visiting http://localhost/phpmyadmin in your web browser. Create a new database for your project and run the sql code needed to create the tables.
+3. Create the Database: Open phpMyAdmin by visiting http://localhost/phpmyadmin in your web browser. Create a new database for your project and run the sql code needed to create the tables.
 
 Here is the SQL code needed to create the tables:
 
